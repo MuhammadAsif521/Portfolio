@@ -1,20 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<section id="home" class="hero">
+  <div class="hero-container">
+    <!-- LEFT CONTENT -->
+    <div class="hero-content fade-in" [class.visible]="isVisible">
+      <h1 class="hero-title">
+        Hi, I'm <span class="accent">Muhammad Asif</span>
+      </h1>
+      <p class="hero-subtitle">
+        {{ displayedText }}
+        @if(showCursor){
+        <span class="cursor">|</span>
+        }
+      </p>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- RIGHT BACKGROUND IMAGE -->
+    <div class="hero-visual fade-in" [class.visible]="isVisible">
+      <div class="image-background"></div>
+    </div>
   </div>
-</ion-content>
+</section>

@@ -1,0 +1,56 @@
+@import '../../../../theme/variables.scss';
+
+/* =========================
+   Router outlet transitions
+   ========================= */
+ion-router-outlet {
+    display: block;
+    will-change: transform, opacity;
+
+    &.hidden {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+    }
+
+    &:not(.hidden) {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.7s ease;
+    }
+}
+
+/* =========================
+   Animations
+   ========================= */
+@keyframes fadePageIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#main-content {
+    height: 100vh;
+    width: 100%;
+
+    ion-router-outlet {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        display: block;
+        &.animate-in {
+    animation: fadePageIn 0.5s cubic-bezier(0.76, -0.14, 1, 1);
+  }
+    }
+}
+@include media-breakpoint-down(sm) {
+#main-content{
+    margin-top: 40px;
+}
+}

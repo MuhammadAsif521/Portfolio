@@ -1,2 +1,164 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+
+// Light Theme
+$light-theme: (
+  surface: linear-gradient(145deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.9)),
+  surface-hover: linear-gradient(145deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 1)),
+  
+  // Text colors
+  text-primary: #1e293b,
+  text-secondary: #334155,
+  text-muted: #64748b,
+  
+  // Accent colors
+  accent-primary: #6366f1,
+  accent-secondary: #8b5cf6,
+  accent-tertiary: #06b6d4,
+  accent-success: #10b981,
+  accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4),
+  accent-gradient-hover: linear-gradient(135deg, #5855eb, #7c3aed, #0891b2),
+  
+  // Border and effects
+  border: rgba(148, 163, 184, 0.2),
+  border-hover: rgba(148, 163, 184, 0.3),
+  shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+  shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
+  shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
+  shadow-glow: 0 0 30px rgba(99, 102, 241, 0.2),
+  glass-bg: rgba(15, 22, 41, 0.4),
+  glass-border: rgba(30, 41, 59, 0.1),
+);
+
+// Dark Theme
+$dark-theme: (
+  // Background colors
+  bg-primary: #0a0f1c,
+  bg-secondary: #0f1629,
+  bg-tertiary: #1a2332,
+  surface: linear-gradient(145deg, rgba(26, 35, 50, 0.8), rgba(15, 22, 41, 0.9)),
+  surface-hover: linear-gradient(145deg, rgba(26, 35, 50, 0.95), rgba(15, 22, 41, 1)),
+  
+  // Text colors
+  text-primary: #ffffff,
+  text-secondary: #e2e8f0,
+  text-muted: #94a3b8,
+  
+  // Accent colors
+  accent-primary: #6366f1,
+  accent-secondary: #8b5cf6,
+  accent-tertiary: #06b6d4,
+  accent-success: #10b981,
+  accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4),
+  accent-gradient-hover: linear-gradient(135deg, #5855eb, #7c3aed, #0891b2),
+  
+  // Border and effects
+  border: rgba(148, 163, 184, 0.1),
+  border-hover: rgba(148, 163, 184, 0.2),
+  shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+  shadow-glow: 0 0 30px rgba(99, 102, 241, 0.3),
+  glass-bg: rgba(15, 22, 41, 0.4),
+  glass-border: rgba(255, 255, 255, 0.1),
+);
+
+// Theme mixin
+@mixin theme-variables($theme) {
+  @each $key, $value in $theme {
+    --#{$key}: #{$value};
+  }
+}
+
+// Apply themes
+:root {
+  @include theme-variables($dark-theme);
+}
+
+[data-theme="light"] {
+  @include theme-variables($light-theme);
+}
+
+[data-theme="dark"] {
+  @include theme-variables($dark-theme);
+}
+
+// Common variables
+:root {
+ --font-heading: 'Playfair Display', serif;
+  --font-primary: 'Inter', system-ui, sans-serif;
+  --border-radius-sm: 0.5rem;
+  --border-radius-md: 0.75rem;
+  --border-radius-lg: 1rem;
+  --border-radius-xl: 1.5rem;
+  --border-radius-full: 50%;
+  --transition: all 0.3s ease;
+  --z-header: 1000;
+  --z-modal: 1001;
+}
+
+// Breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Responsive mixins
+@mixin media-breakpoint-up($name) {
+  $min: map-get($breakpoints, $name);
+  @if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($name) {
+  $max: map-get($breakpoints, $name) - 0.02;
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+// Animation keyframes
+@keyframes backgroundShift {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-30px) rotate(0.5deg);
+  }
+  66% {
+    transform: translateY(20px) rotate(-0.3deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotateY(5deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

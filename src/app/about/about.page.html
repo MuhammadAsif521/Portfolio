@@ -1,0 +1,72 @@
+<section id="about" class="section">
+  <div class="section-header fade-in">
+    <h2 class="section-title">About Me</h2>
+    <p class="section-subtitle">Passionate developer crafting innovative solutions</p>
+  </div>
+
+  <!-- Two-column main grid -->
+  <div class="about-grid">
+    <!-- LEFT COLUMN -->
+    <div class="left-column">
+      <div class="about-text fade-in">
+        <p>
+          I'm Muhammad Asif, a passionate Full-Stack Mobile & Web Developer with expertise in creating
+          high-performance hybrid applications. My journey in development has been driven by a love for
+          clean code, innovative solutions, and user-centric design.
+        </p>
+        <p>
+          Specializing in Ionic Angular and Capacitor, I build applications that provide native-like
+          experiences across all platforms. From authentication systems to real-time features,
+          I deliver complete solutions from concept to deployment.
+        </p>
+        <p>
+          When I'm not coding, you'll find me exploring new technologies, contributing to open-source
+          projects, and staying up-to-date with the latest industry trends.
+        </p>
+      </div>
+
+      <!-- Skills Highlight -->
+      <div class="skills-highlight fade-in">
+        <h3>What I Do Best</h3>
+        <ul class="skills-list">
+          <li>Cross-platform mobile app development</li>
+          <li>Full-stack web application development</li>
+          <li>API design and integration</li>
+          <li>Database design and optimization</li>
+          <li>User experience and interface design</li>
+        </ul>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid fade-in">
+        <div 
+          class="stat-card" 
+          *ngFor="let stat of stats; let i = index"
+          [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="stat-number">
+            <span>{{ stat.value }}{{ stat.suffix }}</span>
+          </div>
+          <div class="stat-label">{{ stat.label }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN (Timeline) -->
+    <div class="experience-timeline fade-in">
+      <h3>My Journey</h3>
+      <div class="timeline">
+        <div 
+          class="timeline-item"
+          *ngFor="let item of timeline; let i = index"
+          [style.animation-delay]="(i * 0.2) + 's'">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h4>{{ item.title }}</h4>
+            <span class="timeline-date">{{ item.date }}</span>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

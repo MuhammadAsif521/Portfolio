@@ -1,0 +1,80 @@
+<section id="skills" class="section">
+  <div class="section-header fade-in">
+    <h2 class="section-title">Skills & Expertise</h2>
+    <p class="section-subtitle">Technologies I use to bring ideas to life</p>
+  </div>
+  
+  <div class="skills-grid">
+    @for (category of skillCategories; track $index; let i = $index) {
+      <div 
+        class="skill-category fade-in"
+        [style.animation-delay]="(i * 0.1) + 's'"
+      >
+        <div class="skill-header">
+          <div class="skill-icon">
+            <i [class]="category.icon"></i>
+          </div>
+          <h3>{{ category.name }}</h3>
+        </div>
+        
+        <div class="skills-list">
+          @for (skill of category.skills; track $index; let j = $index) {
+            <span 
+              class="skill-tag"
+              [style.animation-delay]="((j * 0.1) + (j * 0.05)) + 's'"
+            >
+              {{ skill }}
+            </span>
+          }
+        </div>
+        
+        <div class="skill-level">
+          <div class="level-bar">
+            <div 
+              class="level-fill" 
+              [style.width]="category.level + '%'"
+              [style.animation-delay]="(i * 0.2) + 's'"
+            ></div>
+          </div>
+          <span class="level-text">{{ category.level }}% Proficiency</span>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="additional-skills fade-in">
+    <h3>Additional Technologies & Tools</h3>
+    <div class="tools-grid">
+      @for (tool of additionalTools; track $index; let k = $index) {
+        <div 
+          class="tool-item"
+          [style.animation-delay]="(k * 0.05) + 's'"
+        >
+          <div class="tool-icon">
+            <i [class]="tool.icon"></i>
+          </div>
+          <span>{{ tool.name }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- <div class="certifications fade-in">
+    <h3>Certifications & Learning</h3>
+    <div class="cert-grid">
+      @for (cert of certifications; track $index; let m = $index) {
+        <div 
+          class="cert-card"
+          [style.animation-delay]="(m * 0.1) + 's'"
+        >
+          <div class="cert-icon">
+            <i [class]="cert.icon"></i>
+          </div>
+          <h4>{{ cert.title }}</h4>
+          <p>{{ cert.issuer }}</p>
+          <span class="cert-date">{{ cert.year }}</span>
+        </div>
+      }
+    </div>
+  </div> -->
+</section>

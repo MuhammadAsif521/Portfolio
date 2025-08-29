@@ -11,7 +11,7 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import('./home/home.page').then((m) => m.HomePage),
+          import('././Pages/home/home.page').then((m) => m.HomePage),
         data: { animation: 'HomePage' },
       },
       {
@@ -22,25 +22,25 @@ export const routes: Routes = [
       {
         path: 'about',
         loadComponent: () =>
-          import('./about/about.page').then((m) => m.AboutPage),
+          import('././Pages/about/about.page').then((m) => m.AboutPage),
         data: { animation: 'AboutPage' },
       },
       {
         path: 'projects',
         loadComponent: () =>
-          import('./projects/projects.page').then((m) => m.ProjectsPage),
+          import('././Pages/projects/projects.page').then((m) => m.ProjectsPage),
         data: { animation: 'ProjectsPage' },
       },
       {
         path: 'contact',
         loadComponent: () =>
-          import('./contact/contact.page').then((m) => m.ContactPage),
+          import('././Pages/contact/contact.page').then((m) => m.ContactPage),
         data: { animation: 'ContactPage' },
       },
       {
         path: 'skills',
         loadComponent: () =>
-          import('./skills/skills.page').then((m) => m.SkillsPage),
+          import('././Pages/skills/skills.page').then((m) => m.SkillsPage),
         data: { animation: 'SkillsPage' },
       },
     ],

@@ -1,5 +1,5 @@
-// skills.component.ts
 import { Component, OnInit, AfterViewInit, ElementRef, inject } from '@angular/core';
+import { FooterComponent } from "src/app/core/components/footer/footer.component";
 
 interface SkillCategory {
   name: string;
@@ -23,10 +23,11 @@ interface Certification {
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.page.html',
-  styleUrls: ['./skills.page.scss']
+  styleUrls: ['./skills.page.scss'],
+  imports: [FooterComponent]
 })
 export class SkillsPage implements OnInit, AfterViewInit {
- 
+
   private elementRef: ElementRef = inject (ElementRef);
 
   skillCategories: SkillCategory[] = [
@@ -164,7 +165,7 @@ export class SkillsPage implements OnInit, AfterViewInit {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          
+
           // Trigger skill level animations
           if (entry.target.classList.contains('skill-category')) {
             this.animateSkillLevel(entry.target);
@@ -182,7 +183,7 @@ export class SkillsPage implements OnInit, AfterViewInit {
     if (levelFill) {
       const targetWidth = levelFill.style.width;
       levelFill.style.width = '0';
-      
+
       setTimeout(() => {
         levelFill.style.width = targetWidth;
       }, 300);

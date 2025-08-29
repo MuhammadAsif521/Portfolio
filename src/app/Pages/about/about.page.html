@@ -39,15 +39,16 @@
 
       <!-- Stats -->
       <div class="stats-grid fade-in">
-        <div 
-          class="stat-card" 
-          *ngFor="let stat of stats; let i = index"
+        @for(stat of stats;track $index; let i = $index){
+        <div
+          class="stat-card"
           [style.animation-delay]="(i * 0.1) + 's'">
           <div class="stat-number">
             <span>{{ stat.value }}{{ stat.suffix }}</span>
           </div>
           <div class="stat-label">{{ stat.label }}</div>
         </div>
+      }
       </div>
     </div>
 
@@ -55,9 +56,9 @@
     <div class="experience-timeline fade-in">
       <h3>My Journey</h3>
       <div class="timeline">
-        <div 
+        @for(item of timeline;track $index ;let i = $index){
+        <div
           class="timeline-item"
-          *ngFor="let item of timeline; let i = index"
           [style.animation-delay]="(i * 0.2) + 's'">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
@@ -66,7 +67,9 @@
             <p>{{ item.description }}</p>
           </div>
         </div>
+      }
       </div>
     </div>
   </div>
+  <app-footer/>
 </section>

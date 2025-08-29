@@ -1,10 +1,12 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { FooterComponent } from "src/app/core/components/footer/footer.component";
 
 @Component({
   standalone: true,
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  imports: [FooterComponent],
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   isVisible = false;

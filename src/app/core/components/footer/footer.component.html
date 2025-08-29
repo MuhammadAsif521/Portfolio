@@ -1,0 +1,28 @@
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Social Links Section -->
+    <div class="footer-social">
+      @for(social of socialLinks; track $index){
+      <a [href]="social.url" [title]="social.name" target="_blank" rel="noopener noreferrer">
+        <i [class]="social.icon"></i>
+      </a>
+      }
+    </div>
+
+    <!-- Tech Section -->
+    <div class="footer-tech">
+      <span>Made with</span>
+      <div class="tech-icons">
+        <i class="fab fa-angular" title="Angular"></i>
+        <i class="fas fa-heart" title="Love"></i>
+        <i class="fab fa-sass" title="SCSS"></i>
+      </div>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="footer-copyright">
+      <p>&copy; {{ currentYear }} Muhammad Asif. All rights reserved.</p>
+      <p>Built with passion and modern web technologies</p>
+    </div>
+  </div>
+</footer>

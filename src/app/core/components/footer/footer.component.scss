@@ -1,0 +1,217 @@
+@use '../../../../theme/variables.scss' as *;
+
+.footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+  // position: relative;
+  &::before {
+    content: '';
+    // position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent-gradient);
+  }
+}
+
+.footer-container {
+  width: 100%;
+  display: grid;
+  margin: 0 auto;
+  padding: 2rem 1.2rem 1rem;
+  
+  // Desktop: Single row, three columns
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "social tech copyright";
+  gap: 2rem;
+}
+
+.footer-section {
+  h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--accent-gradient);
+      border-radius: 1px;
+    }
+  }
+}
+
+.footer-social {
+  grid-area: social;
+  display: flex;
+  gap: 0.75rem;
+
+  a {
+    width: 40px;
+    height: 40px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+
+    &:hover {
+      background: var(--accent-gradient);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    i {
+      font-size: 1rem;
+    }
+  }
+}
+
+.footer-tech {
+  grid-area: tech;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+
+  .tech-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      font-size: 1.2rem;
+      transition: var(--transition);
+
+      &.fab.fa-angular {
+        color: #dd0031;
+      }
+
+      &.fas.fa-heart {
+        color: #ef4444;
+        animation: heartbeat 2s ease-in-out infinite;
+      }
+
+      &.fab.fa-sass {
+        color: #cc6699;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.footer-copyright {
+  grid-area: copyright;
+  text-align: center;
+  margin-top: -20px;
+  
+  p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@keyframes heartbeat {
+  0%, 50%, 100% {
+    transform: scale(1);
+  }
+  25%, 75% {
+    transform: scale(1.1);
+  }
+}
+
+// Tablet Screens: 2 rows, first row has 2 columns, second row has 1 column
+@include media-breakpoint-down(md) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+      "social tech"
+      "copyright copyright";
+    gap: 2rem;
+    padding: 2.5rem 1rem 1rem;
+  }
+
+  .footer-social {
+    justify-content: flex-start;
+  }
+
+  .footer-tech {
+    justify-content: flex-end;
+  }
+
+  .footer-copyright {
+    justify-self: center;
+  }
+
+  .footer-section {
+    h4::after {
+      left: 0;
+      transform: none;
+    }
+  }
+}
+
+// Mobile Screens: 3 rows, each with 1 column
+@include media-breakpoint-down(sm) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 
+      "social"
+      "tech"
+      "copyright";
+    gap: 1.5rem;
+    padding: 2rem 1rem 1rem;
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-tech {
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+
+  .footer-copyright {
+    p {
+      font-size: 0.8rem;
+
+      &:last-child {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .footer-section {
+    h4::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

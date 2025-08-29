@@ -3,10 +3,10 @@
     <h2 class="section-title">Skills & Expertise</h2>
     <p class="section-subtitle">Technologies I use to bring ideas to life</p>
   </div>
-  
+
   <div class="skills-grid">
     @for (category of skillCategories; track $index; let i = $index) {
-      <div 
+      <div
         class="skill-category fade-in"
         [style.animation-delay]="(i * 0.1) + 's'"
       >
@@ -16,10 +16,10 @@
           </div>
           <h3>{{ category.name }}</h3>
         </div>
-        
+
         <div class="skills-list">
           @for (skill of category.skills; track $index; let j = $index) {
-            <span 
+            <span
               class="skill-tag"
               [style.animation-delay]="((j * 0.1) + (j * 0.05)) + 's'"
             >
@@ -27,11 +27,11 @@
             </span>
           }
         </div>
-        
+
         <div class="skill-level">
           <div class="level-bar">
-            <div 
-              class="level-fill" 
+            <div
+              class="level-fill"
               [style.width]="category.level + '%'"
               [style.animation-delay]="(i * 0.2) + 's'"
             ></div>
@@ -46,7 +46,7 @@
     <h3>Additional Technologies & Tools</h3>
     <div class="tools-grid">
       @for (tool of additionalTools; track $index; let k = $index) {
-        <div 
+        <div
           class="tool-item"
           [style.animation-delay]="(k * 0.05) + 's'"
         >
@@ -63,7 +63,7 @@
     <h3>Certifications & Learning</h3>
     <div class="cert-grid">
       @for (cert of certifications; track $index; let m = $index) {
-        <div 
+        <div
           class="cert-card"
           [style.animation-delay]="(m * 0.1) + 's'"
         >
@@ -77,4 +77,5 @@
       }
     </div>
   </div> -->
+  <app-footer/>
 </section>

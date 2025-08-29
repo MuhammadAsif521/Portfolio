@@ -1,0 +1,140 @@
+<section id="contact" class="section">
+  <div class="section-header fade-in">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="section-subtitle">Have a project in mind? Let's work together</p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-form fade-in">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" formControlName="name" [class.error]="isFieldInvalid('name')"
+            placeholder="Enter your full name">
+          @if (isFieldInvalid('name')) {
+            <div class="error-message">
+            {{ getFieldError('name') }}
+          </div>
+        }
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" formControlName="email" [class.error]="isFieldInvalid('email')"
+            placeholder="your.email@example.com">
+             @if (isFieldInvalid('email')) {
+          <div class="error-message">
+            {{ getFieldError('email') }}
+          </div>
+        }
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" formControlName="subject" [class.error]="isFieldInvalid('subject')"
+            placeholder="What's this about?">
+             @if (isFieldInvalid('subject')) {
+          <div class="error-message">
+            {{ getFieldError('subject') }}
+          </div>
+        }
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" formControlName="message" rows="5" [class.error]="isFieldInvalid('message')"
+            placeholder="Tell me about your project..."></textarea>
+          @if (isFieldInvalid('message')) {
+            <div class="error-message">
+            {{ getFieldError('message') }}
+          </div>
+        }
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn" [disabled]="isSubmitting">
+          @if (!isSubmitting) {
+          <span>
+            Send Message
+          </span>
+        }
+          @if (isSubmitting) {
+          <span class="loading-content">
+            <div class="loading-spinner"></div>
+          </span>
+          }
+        </button>
+        @if (statusMessage) {
+        <div class="form-status" [ngClass]="statusClass">
+          <i [class]="statusIcon"></i>
+          {{ statusMessage }}
+        </div>
+        }
+      </form>
+    </div>
+
+    <div class="contact-info fade-in">
+      <div class="contact-details">
+        <h3>Let's Connect</h3>
+        <p>
+          I'm always interested in hearing about new projects and opportunities.
+          Whether you're a company looking to hire, or you're looking for a consultant,
+          I'd love to hear from you.
+        </p>
+
+        <div class="contact-methods">
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <strong>Email</strong>
+              <span>m.asif340315@gmail.com</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <strong>Location</strong>
+              <span>Pakpattan Sharif, Pakistan</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div>
+              <strong>Availability</strong>
+              <span>Open for freelance projects</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div>
+              <strong>Timezone</strong>
+              <span>PKT (UTC +5)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="response-time">
+        <div class="response-card">
+          <div class="response-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <div class="response-content">
+            <h4>Quick Response</h4>
+            <p>I typically respond within 24 hours</p>
+          </div>
+        </div>
+      </div>
+      <app-footer/>
+</section>

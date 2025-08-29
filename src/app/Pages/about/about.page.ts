@@ -1,6 +1,5 @@
-// about.component.ts
-import { NgFor } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
+import { FooterComponent } from "src/app/core/components/footer/footer.component";
 
 interface Stat {
   value: number;
@@ -19,10 +18,10 @@ interface TimelineItem {
   standalone:true,
   templateUrl: './about.page.html',
   styleUrls: ['./about.page.scss'],
-  imports :[NgFor]
+  imports: [FooterComponent]
 })
 export class AboutPage implements OnInit, AfterViewInit {
-  
+
   stats: Stat[] = [
     { value: 50, suffix: '+', label: 'Projects Completed' },
     { value: 3, suffix: '+', label: 'Years Experience' },
@@ -71,7 +70,7 @@ export class AboutPage implements OnInit, AfterViewInit {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          
+
           // Trigger count-up animation for stats
           if (entry.target.classList.contains('stats-grid')) {
             this.animateStats();
@@ -86,7 +85,7 @@ export class AboutPage implements OnInit, AfterViewInit {
 
   private animateStats(): void {
     const statNumbers = this.elementRef.nativeElement.querySelectorAll('.stat-number span[countUp]');
-    
+
     statNumbers.forEach((element: HTMLElement) => {
       const target = parseInt(element.getAttribute('countUp') || '0');
       const duration = parseInt(element.getAttribute('duration') || '2000');

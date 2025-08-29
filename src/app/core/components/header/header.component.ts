@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { UtilityService } from 'src/app/Services/utility.service';
 import { filter } from 'rxjs';
+import { UtilityService } from '../../Services/utility.service';
 
 @Component({
   standalone: true,

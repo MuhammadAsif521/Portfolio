@@ -1,4 +1,3 @@
-// projects.component.html
 <section id="projects" class="section">
   <div class="section-header fade-in">
     <h2 class="section-title">Featured Projects</h2>
@@ -6,28 +5,28 @@
   </div>
 
   <div class="filter-tabs fade-in">
-    <button 
+    <button
       class="filter-btn"
       [class.active]="activeFilter === 'all'"
       (click)="setFilter('all')"
     >
       All Projects
     </button>
-    <button 
+    <button
       class="filter-btn"
       [class.active]="activeFilter === 'mobile'"
       (click)="setFilter('mobile')"
     >
       Mobile Apps
     </button>
-    <button 
+    <button
       class="filter-btn"
       [class.active]="activeFilter === 'web'"
       (click)="setFilter('web')"
     >
       Web Apps
     </button>
-    <button 
+    <button
       class="filter-btn"
       [class.active]="activeFilter === 'backend'"
       (click)="setFilter('backend')"
@@ -38,7 +37,7 @@
 
   <div class="projects-grid">
     @for(project of filteredProjects;track $index ;let i = $index){
-    <div 
+    <div
       class="project-card fade-in"
       [style.animation-delay]="(i * 0.1) + 's'"
       [class.hidden]="!isProjectVisible(project)"
@@ -46,8 +45,8 @@
       <div class="project-image" [style.background]="project.gradient">
         <div class="project-overlay">
           <div class="project-links">
-            <a 
-              [href]="project.liveUrl" 
+            <a
+              [href]="project.liveUrl"
               class="project-link"
               target="_blank"
               rel="noopener noreferrer"
@@ -55,8 +54,8 @@
             >
               <i class="fas fa-external-link-alt"></i>
             </a>
-            <a 
-              [href]="project.codeUrl" 
+            <a
+              [href]="project.codeUrl"
               class="project-link"
               target="_blank"
               rel="noopener noreferrer"
@@ -72,7 +71,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="project-content">
         <div class="project-header">
           <h3 class="project-title">{{ project.title }}</h3>
@@ -81,9 +80,9 @@
             <span>{{ project.category }}</span>
           </div>
         </div>
-        
+
         <p class="project-description">{{ project.description }}</p>
-        
+
         <div class="project-features">
           <h4>Key Features:</h4>
           <ul>
@@ -92,25 +91,25 @@
             }
           </ul>
         </div>
-        
+
         <div class="project-tags">
          @for(tag of project.tags; track $index){
-          <span 
-            class="project-tag" 
+          <span
+            class="project-tag"
           >
             {{ tag }}
           </span>
         }
         </div>
-        
+
         <div class="project-footer">
           <div class="project-date">
             <i class="fas fa-calendar-alt"></i>
             <span>{{ project.date }}</span>
           </div>
           <div class="project-actions">
-            <a 
-              [href]="project.liveUrl" 
+            <a
+              [href]="project.liveUrl"
               class="btn btn-secondary"
               target="_blank"
               rel="noopener noreferrer"
@@ -118,8 +117,8 @@
               <i class="fas fa-play"></i>
               Demo
             </a>
-            <a 
-              [href]="project.codeUrl" 
+            <a
+              [href]="project.codeUrl"
               class="btn btn-primary"
               target="_blank"
               rel="noopener noreferrer"
@@ -142,5 +141,6 @@
       View GitHub Profile
     </a>
   </div>
+  <app-footer/>
 </section>
 

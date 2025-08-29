@@ -23,11 +23,11 @@ export class LayoutComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         const outlet = document.querySelector('ion-router-outlet');
         outlet?.classList.add('animate-in');
-        setTimeout(() => outlet?.classList.remove('animate-in'), 200);
+        setTimeout(() => outlet?.classList.remove('animate-in'), 500);
       }
 
       if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-        setTimeout(() => this.isLoading.set(false), 350);
+        setTimeout(() => this.isLoading.set(false), 700);
       }
     });
   }

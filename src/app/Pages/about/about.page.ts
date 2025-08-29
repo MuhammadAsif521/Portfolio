@@ -1,17 +1,8 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { FooterComponent } from "src/app/core/components/footer/footer.component";
+import { Stat, TimelineItem } from 'src/app/core/interfaces/core.interface';
 
-interface Stat {
-  value: number;
-  suffix: string;
-  label: string;
-}
 
-interface TimelineItem {
-  title: string;
-  date: string;
-  description: string;
-}
 
 @Component({
   selector: 'app-about',

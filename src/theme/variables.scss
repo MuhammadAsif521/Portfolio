@@ -1,35 +1,6 @@
-
 @use "sass:map";
-// Light Theme
-$light-theme: (
-  surface: linear-gradient(145deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.9)),
-  surface-hover: linear-gradient(145deg, rgba(248, 250, 252, 0.95), rgba(241, 245, 249, 1)),
-  
-  // Text colors
-  text-primary: #1e293b,
-  text-secondary: #334155,
-  text-muted: #64748b,
-  
-  // Accent colors
-  accent-primary: #6366f1,
-  accent-secondary: #8b5cf6,
-  accent-tertiary: #06b6d4,
-  accent-success: #10b981,
-  accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4),
-  accent-gradient-hover: linear-gradient(135deg, #5855eb, #7c3aed, #0891b2),
-  
-  // Border and effects
-  border: rgba(148, 163, 184, 0.2),
-  border-hover: rgba(148, 163, 184, 0.3),
-  shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
-  shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05),
-  shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
-  shadow-glow: 0 0 30px rgba(99, 102, 241, 0.2),
-  glass-bg: rgba(15, 22, 41, 0.4),
-  glass-border: rgba(30, 41, 59, 0.1),
-);
 
-// Dark Theme
+// Only keep the Dark Theme
 $dark-theme: (
   // Background colors
   bg-primary: #0a0f1c,
@@ -69,22 +40,16 @@ $dark-theme: (
   }
 }
 
-// Apply themes
-:root {
-  @include theme-variables($dark-theme);
-}
-
-[data-theme="light"] {
-  @include theme-variables($light-theme);
-}
-
+// Always apply dark theme to both root and data-theme attributes
+:root,
+[data-theme="light"],
 [data-theme="dark"] {
   @include theme-variables($dark-theme);
 }
 
 // Common variables
 :root {
- --font-heading: 'Playfair Display', serif;
+  --font-heading: 'Playfair Display', serif;
   --font-primary: 'Inter', system-ui, sans-serif;
   --border-radius-sm: 0.5rem;
   --border-radius-md: 0.75rem;

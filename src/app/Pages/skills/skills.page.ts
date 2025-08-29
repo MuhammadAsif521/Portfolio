@@ -1,25 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, inject } from '@angular/core';
 import { FooterComponent } from "src/app/core/components/footer/footer.component";
-
-interface SkillCategory {
-  name: string;
-  icon: string;
-  skills: string[];
-  level: number;
-}
-
-interface Tool {
-  name: string;
-  icon: string;
-}
-
-interface Certification {
-  title: string;
-  issuer: string;
-  year: string;
-  icon: string;
-}
-
+import { SkillCategory, Tool } from 'src/app/core/interfaces/core.interface';
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.page.html',

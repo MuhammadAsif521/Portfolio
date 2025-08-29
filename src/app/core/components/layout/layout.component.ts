@@ -36,6 +36,5 @@ export class LayoutComponent implements OnInit {
     this.windowWidth.set(window.innerWidth);
   }
   ngOnInit() { }
-  title = 'muhammad-asif-portfolio';
 
 }

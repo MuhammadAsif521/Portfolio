@@ -1,3 +1,4 @@
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -26,10 +27,10 @@
 @import "@ionic/angular/css/flex-utils.css";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
-
-*{
-    user-select: none;
+* {
+  user-select: none;
 }
+
 /* For Webkit browsers (Chrome, Edge, Safari) */
 * {
   scrollbar-width: none; /* Firefox */
@@ -43,6 +44,9 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
+
 body {
   font-family: var(--font-primary);
+  background-color: #0a0f1c; /* Fallback for dark theme */
+  color: #ffffff; /* Fallback for dark theme */
 }

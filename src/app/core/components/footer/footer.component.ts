@@ -1,60 +1,39 @@
-
-// footer.component.ts
-import { Component, OnInit } from '@angular/core';
-
-interface SocialLink {
-  name: string;
-  url: string;
-  icon: string;
-}
-
+import { Component } from "@angular/core";
+import { SocialLink } from "../../interfaces/core.interface";
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
   standalone: true
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   currentYear: number = new Date().getFullYear();
-
   socialLinks: SocialLink[] = [
     {
       name: 'LinkedIn',
-      url: '#',
+      url: 'https://www.linkedin.com/in/muhammad-asif-94ab47350/',
       icon: 'fab fa-linkedin-in'
     },
     {
       name: 'GitHub',
-      url: '#',
+      url: 'https://github.com/MuhammadAsif521',
       icon: 'fab fa-github'
     },
     {
-      name: 'Twitter',
-      url: '#',
-      icon: 'fab fa-twitter'
+      name: 'WhatsApp',
+      url: 'https://wa.me/923236879557?text=Hello%20Muhammad%20Asif',
+      icon: 'fab fa-whatsapp'
+    },
+    {
+      name: 'Skype',
+      url: 'https://teams.live.com/l/invite/FEA0D91rkA3oAaZBAE?v=g1',
+      icon: 'fab fa-skype'
     },
     {
       name: 'Email',
-      url: 'mailto:m.asif340315@gmail.com',
+      url: 'https://mail.google.com/mail/?view=cm&fs=1&to=m.asif340315@gmail.com',
       icon: 'fas fa-envelope'
     }
   ];
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  scrollToSection(sectionId: string, event: Event): void {
-    event.preventDefault();
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const targetPosition = element.offsetTop - offset;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
-    }
-  }
 }

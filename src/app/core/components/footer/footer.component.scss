@@ -2,27 +2,21 @@
 
 .footer {
   border-top: 1px solid var(--border);
-  background: var(--bg-secondary);
-  // position: relative;
-  &::before {
-    content: '';
-    // position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--accent-gradient);
-  }
+  background: var(--glass-bg);
+  position: relative;
+  margin-top: auto; // This pushes footer to bottom
+  width: 100%;
 }
 
 .footer-container {
   width: 100%;
   display: grid;
+  align-items: center;
   margin: 0 auto;
   padding: 2rem 1.2rem 1rem;
-  
+
   // Desktop: Single row, three columns
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   grid-template-areas: "social tech copyright";
   gap: 2rem;
@@ -35,17 +29,6 @@
     font-weight: 600;
     margin-bottom: 1.5rem;
     position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 30px;
-      height: 2px;
-      background: var(--accent-gradient);
-      border-radius: 1px;
-    }
   }
 }
 
@@ -84,6 +67,7 @@
   grid-area: tech;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
   color: var(--text-muted);
   font-size: 0.9rem;
@@ -119,9 +103,11 @@
 
 .footer-copyright {
   grid-area: copyright;
-  text-align: center;
-  margin-top: -20px;
-  
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   p {
     color: var(--text-muted);
     font-size: 0.9rem;
@@ -144,11 +130,11 @@
 }
 
 // Tablet Screens: 2 rows, first row has 2 columns, second row has 1 column
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(lg) {
   .footer-container {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
       "social tech"
       "copyright copyright";
     gap: 2rem;
@@ -165,6 +151,7 @@
 
   .footer-copyright {
     justify-self: center;
+    text-align: center;
   }
 
   .footer-section {
@@ -180,7 +167,7 @@
   .footer-container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-areas: 
+    grid-template-areas:
       "social"
       "tech"
       "copyright";
@@ -199,11 +186,14 @@
   }
 
   .footer-copyright {
+    text-align: center;
+    
     p {
       font-size: 0.8rem;
 
       &:last-child {
         font-size: 0.75rem;
+        margin-bottom: 0;
       }
     }
   }

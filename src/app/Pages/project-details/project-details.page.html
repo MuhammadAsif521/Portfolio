@@ -1,0 +1,90 @@
+<div class="project-details-page">
+
+  @if (isLoading) {
+  <div class="loading-state">
+    <div class="loading-spinner"></div>
+  </div>
+  } @else if (project) {
+  <div class="details-container">
+    <div class="project-header">
+      <h1>{{ project.title }}</h1>
+      <p>
+        @for (framework of project.framework; track $index) {
+        <span>{{framework}}</span>
+        }
+      </p>
+    </div>
+
+    <swiper-container [breakpoints]="{ '280': { 'slidesPerView': 1 } }" [pagination]="true" [navigation]="true">
+      @for (img of project.Images; track $index) {
+      <swiper-slide class="custom-slide">
+        <img [src]="img" alt="">
+      </swiper-slide>
+      }
+    </swiper-container>
+
+
+    <div class="project-body">
+      <div class="main-content">
+        <h2>Project Overview</h2>
+        <p>{{ project.description }}</p>
+        <h2>My Role</h2>
+        <ul>
+          @for (role of project.role; track $index) {
+          <li>{{ role }}</li>
+          }
+        </ul>
+        <div class="platforms">
+          <h2>Platform Availability</h2>
+          <div class="buttons">
+            @for (platform of project.availibillty;track $index) {
+            <a class="platform-btn {{ platform.toLowerCase()}}" [href]="project['availibillty-urls'][$index]">
+              <i [class]="getPlatformIcon(platform)"></i>
+              {{ platform }}
+            </a>
+            }
+          </div>
+        </div>
+
+      </div>
+      <div class="grid">
+        <div class="technologies">
+          <h2>Technologies Used</h2>
+          @for (tech of project.technologies; track $index) {
+          <div class="tech-state">
+            <i [class]="getTechIcon(tech)"></i>&nbsp;&nbsp;&nbsp;<span>{{tech}}</span>
+          </div>
+          }
+        </div>
+        <div class="features">
+          <h2>Key Features</h2>
+          <ul>
+            @for (feature of project.keyfeatures; track $index) {
+            <li>{{feature}}</li>
+            }
+          </ul>
+        </div>
+        <div class="project-info">
+          <h2>Project Information</h2>
+          <div class="timeline">
+            <h3>Timeline</h3>
+            <p>{{project.from}} - {{project.to}}</p>
+          </div>
+          <div class="team">
+            <h3>Team Size</h3>
+            <p>{{project.members}}</p>
+          </div>
+          <div class="client">
+            <h3>Client</h3>
+            <p>{{project.clientname}}</p>
+          </div>
+          <div class="status">
+            <h3>Status</h3>
+            <p>{{project.status}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

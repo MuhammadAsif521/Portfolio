@@ -1,8 +1,12 @@
 @use '../../../theme/variables.scss' as *;
 
 .hero {
-  min-height: 100vh;
-  overflow: auto;
+  max-width: 100%;
+  min-height: calc(100vh - 80px); // Adjusted for header height
+  height: auto;
+  margin: auto;
+  display: flex;
+  align-items: center;
 
   &::before {
     content: '';
@@ -22,8 +26,7 @@
 .hero-container {
   max-width: 1200px;
   margin: 0 auto;
-  height: 100vh;
-  padding: 6rem 1rem 2rem;
+  padding: 4rem 1rem 2rem; // Reduced top padding
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -31,6 +34,13 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+}
+
+.btn {
+  height: 40px;
+  width: 200px;
+  background: var(--accent-gradient);
+  border-radius: 9999px;
 }
 
 .hero-title {
@@ -63,11 +73,14 @@
 }
 
 @keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }
 
-/* === RIGHT SIDE FULL BACKGROUND IMAGE === */
 .hero-visual {
   position: relative;
   width: 100%;
@@ -81,31 +94,20 @@
 .image-background {
   width: 100%;
   height: 100%;
-  background: url("../../../assets/logo/My\ Pic.png") no-repeat center center/cover;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
+  background: url("../../../assets/logo/My\ Pic2.png") no-repeat center center/cover;
   position: relative;
-  animation: float 6s ease-in-out infinite;
-
-  /* Gradient overlay for merging effect */
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(0,0,0,0.3) 0%,
-      rgba(0,0,0,0.2) 40%,
-      transparent 100%
-    );
-    border-radius: var(--border-radius-lg);
-  }
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .fade-in {
@@ -121,11 +123,15 @@
 
 /* Responsive */
 @include media-breakpoint-down(md) {
+  .hero {
+    min-height: auto; // Remove fixed height on mobile
+  }
+  
   .hero-container {
-    height: 100vh;
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2rem;
+    padding: 3rem 1rem 2rem; // Reduced padding
   }
 
   .hero-visual {
@@ -135,11 +141,13 @@
 
 @include media-breakpoint-down(sm) {
   .hero-container {
-    padding: 5rem 1rem 2rem;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
   }
 
   .hero-visual {
     min-height: 220px;
+    max-height: 50vh;
   }
 
   .hero-title {
@@ -149,7 +157,4 @@
   .hero-subtitle {
     font-size: 1rem;
   }
-}
-app-footer {
-  width: 100%;
-}
+} 

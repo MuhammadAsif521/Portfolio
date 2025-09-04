@@ -1,0 +1,49 @@
+<!-- form-control.component.html -->
+@if (isTextArea()) {
+  <div class="form-group">
+    <label [for]="name()">{{ name() | titlecase }}</label>
+    <textarea id="{{ name() }}" color="primary"
+      [ngStyle]="{ 'min-height': textAreaHeight() }"
+      [formControlName]="name()"
+      [class.error]="fc.invalid && (fc.touched || fc.dirty)"
+      [placeholder]="placeholder()"
+      [readonly]="disable()"
+      (focus)="onFocus()"
+      (blur)="onBlur()">
+    </textarea>
+  </div>
+} @else {
+  <div class="form-group">
+    <label [for]="name()">{{ name() | titlecase }}</label>
+    @if (type() === 'file') {
+      <input id="{{ name() }}" type="file"
+        [attr.multiple]="multiple() ? '' : null"
+        accept="image/*"
+        (change)="onFileChange($event)"
+        [readonly]="disable()" />
+       @if (selectedFiles.length > 0) {
+      <div class="image-preview">
+        @for(file of selectedFiles;track $index; let i = $index){
+        <div class="image-item">
+          <img [src]="file.preview" [alt]="file.name" />
+          <button type="button" class="remove-btn" (click)="removeFile(i)">✕</button>
+        </div>
+      }
+      </div>
+    }
+    } @else {
+      <input id="{{ name() }}" [type]="type()"
+        [class.error]="fc.invalid && (fc.touched || fc.dirty)"
+        [placeholder]="placeholder()"
+        [formControlName]="name()"
+        [readonly]="disable()"
+        (focus)="onFocus()"
+        (blur)="onBlur()" />
+    }
+    @if (shouldShowErrorMessage()) {
+      <div class="error-message">
+        {{ getErrorMessage() }}
+      </div>
+    }
+  </div>
+}

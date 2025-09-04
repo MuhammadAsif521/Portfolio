@@ -1,4 +1,8 @@
-<app-header/>
+<app-header></app-header>
+
 <div id="main-content">
-    <ion-router-outlet [class.hidden]="isLoading()"></ion-router-outlet>
+  <div class="router-container" [@routeFadeAnimation]="getAnimationData(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+  <app-footer/>
 </div>

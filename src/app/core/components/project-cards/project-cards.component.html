@@ -1,0 +1,114 @@
+<!-- Loading State -->
+@if (isLoading) {
+<div class="projects-grid">
+  @for (skeleton of [1,2,3,4,5,6]; track skeleton) {
+  <div class="project-card skeleton-card">
+    <div class="project-image skeleton"></div>
+    <div class="project-content">
+      <div class="project-header">
+        <h3 class="skeleton skeleton-text skeleton-title"></h3>
+        <div class="skeleton skeleton-pill"></div>
+      </div>
+      <p class="skeleton skeleton-text skeleton-text-lg"></p>
+      <p class="skeleton skeleton-text skeleton-text-sm"></p>
+      <div class="project-footer">
+        <div class="project-actions">
+          <div class="skeleton skeleton-btn"></div>
+          <div class="skeleton skeleton-btn"></div>
+          <div class="skeleton skeleton-btn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+}
+
+<!-- Projects Grid -->
+@if (!isLoading && !hasError && hasFilteredProjects) {
+<div class="projects-grid">
+  @for (project of filteredProjects(); track trackByProjectId($index, project); let i = $index) {
+  <div class="project-card fade-in" [style.animation-delay]="(i * 0.1) + 's'">
+
+    <!-- Project Image -->
+    <div class="project-image">
+      <img [src]="project.Images[0]" [alt]="project.title"  />
+
+      <!-- Details Overlay -->
+      @if (!isAdmin) {
+      <div class="image-overlay">
+          <button class="btn btn-outline" (click)="utilSer.navigateToWithData('project-details/' + project.id, project)">
+          <i class="fas fa-info-circle"></i> Details
+        </button>
+      </div>
+    }
+      <!-- Status -->
+      <div class="project-status">
+        <span class="status-badge" [class]="'status-' + project.status"
+          [style.background]="getStatusColor(project.status)">
+          {{ project.status }}
+        </span>
+      </div>
+
+      <!-- Admin Actions -->
+      @if (isAdmin) {
+      <div class="admin-actions">
+        <button class="icon-btn warning" (click)="onEditProject(project)" title="Edit Project">
+          <i class="fas fa-edit"></i>
+        </button>
+        <button class="icon-btn danger" (click)="onDeleteProject(project)" title="Delete Project">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+      }
+    </div>
+
+    <!-- Project Content -->
+    <div class="project-content">
+      <div class="project-header">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <div class="project-category">
+          <span>{{ project.type }}</span>
+        </div>
+      </div>
+
+      <p class="project-description">{{ project.description }}</p>
+
+      <div class="project-footer">
+        <div class="project-actions">
+          @if (project.liveUrl) {
+          <a [href]="project.liveUrl" class="btn btn-secondary" title="View Live Demo">
+            <i class="fas fa-external-link-alt"></i> Demo
+          </a>
+          }
+          @if (project.codeUrl) {
+          <a [href]="project.codeUrl" class="btn btn-primary" title="View Source Code">
+            <i class="fab fa-github"></i> Code
+          </a>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+}
+
+<!-- No Projects Found -->
+@if (!isLoading && !hasError && !hasProjects) {
+<div class="projects-cta fade-in">
+  <i class="fas fa-folder-open empty-icon"></i>
+  <h3>Projects Coming Soon</h3>
+  <p>I’m currently working on some exciting projects. Stay tuned!</p>
+</div>
+}
+
+<!-- No Filtered Results -->
+@if (!isLoading && !hasError && hasProjects && !hasFilteredProjects) {
+<div class="projects-cta fade-in">
+  <i class="fa-solid {{ iconMap[activeFilter()] }} empty-icon"></i>
+  <h3 class="error">
+    No Projects Found For <small>{{ typeMap[activeFilter()] }}</small>
+  </h3>
+</div>
+}

@@ -1,34 +1,39 @@
 <header class="header" [class.scrolled]="isScrolled">
   <div class="nav-container">
-    <a class="logo">
+    <a class="logo" (click)="utilSer.onBackPress()" title="Go Back">
+      <div class="avatar">
+        <img src="assets/icon/favicon.svg" alt="">
+      </div>
       Portfolio
     </a>
 
     <nav>
       <ul class="nav-links" [class.mobile-active]="isMobileMenuOpen">
-        <li>
-          <a (click)="setActive('/home')" [class.active]="activeRoute === '/home'">Home</a>
+        <li (click)="setActive('/home')">
+          <a [class.active]="activeRoute === '/home'">Home</a>
         </li>
-        <li>
-          <a (click)="setActive('/about')" [class.active]="activeRoute === '/about'">About</a>
+        <li (click)="setActive('/about')">
+          <a [class.active]="activeRoute === '/about'">About</a>
         </li>
-        <li>
-          <a (click)="setActive('/skills')" [class.active]="activeRoute === '/skills'">Skills</a>
+        <li (click)="setActive('/skills')">
+          <a [class.active]="activeRoute === '/skills'">Skills</a>
         </li>
-        <li>
-          <a (click)="setActive('/projects')" [class.active]="activeRoute === '/projects'">Projects</a>
+        <li (click)="setActive('/projects')">
+          <a [class.active]="activeRoute === '/projects'">Projects</a>
         </li>
-        <li>
-          <a (click)="setActive('/contact')" [class.active]="activeRoute === '/contact'">Contact</a>
+        <li (click)="setActive('/contact')">
+          <a [class.active]="activeRoute === '/contact'">Contact</a>
         </li>
+        <li (click)="setActive('/blogs')">
+          <a [class.active]="activeRoute === '/blogs'">Blogs</a>
+        </li>
+        <!-- <li (click)="setActive('/admin/login')">
+          <a [class.active]="activeRoute === '/admin/login'">Admin</a>
+        </li> -->
       </ul>
     </nav>
 
-    <div
-      class="mobile-menu"
-      [class.active]="isMobileMenuOpen"
-      (click)="toggleMobileMenu()"
-    >
+    <div class="mobile-menu" [class.active]="isMobileMenuOpen" (click)="toggleMobileMenu()">
       <span></span>
       <span></span>
       <span></span>

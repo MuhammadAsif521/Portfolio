@@ -18,15 +18,21 @@ export class HeaderComponent implements OnInit {
   activeRoute = '/home';
 
   ngOnInit(): void {
-    // Initial route set karo
-    this.activeRoute = this.router.url;
+    this.setActiveRoute(this.router.url);
 
-    // Router events suno (back/forward bhi handle karega)
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        this.activeRoute = event.urlAfterRedirects;
+      .subscribe((event: NavigationEnd) => {
+        this.setActiveRoute(event.urlAfterRedirects);
       });
+  }
+
+  private setActiveRoute(url: string): void {
+    if (url.startsWith('/project-details')) {
+      this.activeRoute = '/projects';
+    } else {
+      this.activeRoute = url;
+    }
   }
 
   @HostListener('window:scroll')

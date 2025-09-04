@@ -1,0 +1,81 @@
+<div class="project-form-container">
+  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+    <!-- Title + Type -->
+    <div class="form-row two-col">
+      <form-control controlName="title" placeholder="Enter Project Title" type="text" [required]="true" />
+      <form-selector controlName="type" [options]="Types" label="Select Type" placeholder="Select Project Type" [required]="true" />
+    </div>
+
+    <!-- Status + Members -->
+    <div class="form-row two-col">
+      <form-selector controlName="status" [options]="Status" label="Status" placeholder="Status" [required]="true" />
+      <form-control controlName="members" type="number" placeholder="Team Size" [required]="true" />
+    </div>
+
+    <!-- Live URL + Code URL -->
+    <div class="form-row two-col">
+      <form-control controlName="liveUrl" type="url" placeholder="https://example.com" />
+      <form-control controlName="codeUrl" type="url" placeholder="https://github.com/username/repo" />
+    </div>
+
+    <!-- Framework full width -->
+    <div class="form-row one-col">
+      <form-selector controlName="framework" [options]="Framework" label="Select Framework" placeholder="Select Framework" [multiple]="true" />
+    </div>
+
+    <!-- From + To dates -->
+    <div class="form-row two-col">
+      <form-control controlName="from" type="month" placeholder="Select Start MM:YY" label="Start Date" [required]="true" />
+      <form-control controlName="to" type="month" placeholder="Select End MM:YY" label="End Date" />
+    </div>
+
+  
+    <div class="form-row two-col">
+      <form-control controlName="clientname" type="text" placeholder="Client Name" />
+      <form-selector controlName="availibillty" [options]="Availibilty" label="Platform Availability" placeholder="Platform Availability" [multiple]="true" />
+    </div>
+
+    <!-- Availability URLs full width -->
+    <div class="form-row one-col">
+      <form-control controlName="availibillty-urls" label="Availability URLs" placeholder="URL 1, URL 2, ..." />
+    </div>
+
+    <!-- Technologies full width -->
+    <div class="form-row one-col">
+      <form-selector controlName="technologies" [options]="Technologies" label="Technologies" placeholder="Technologies Used" [multiple]="true" />
+    </div>
+
+    <!-- Textareas (always full width) -->
+    <div class="form-row one-col">
+      <form-control controlName="description" [textarea]="true" placeholder="Project Description" label="Description" [textAreaHeight]="'130px'" />
+    </div>
+
+    <div class="form-row one-col">
+      <form-control controlName="role" [textarea]="true" placeholder="My Role" label="My Role" [textAreaHeight]="'130px'" />
+    </div>
+
+    <div class="form-row one-col">
+      <form-control controlName="keyfeatures" [textarea]="true" placeholder="Feature 1, Feature 2, ...." label="Key Features" [textAreaHeight]="'130px'" />
+    </div>
+
+    <!-- Images full width -->
+    <div class="form-row one-col">
+      <form-control controlName="Images" type="file" placeholder="Select Images" label="Project Images" [multiple]="true" accept="image/*" />
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary submit-btn" [disabled]="isSubmitting() || projectForm.invalid">
+        @if (!isSubmitting()) {
+          <span>{{ editMode() ? 'Update' : 'Add' }} Project</span>
+        }
+        @if (isSubmitting()) {
+          <span class="loading-content">
+            <div class="loading-spinner"></div>
+          </span>
+        }
+      </button>
+    </div>
+  </form>
+</div>

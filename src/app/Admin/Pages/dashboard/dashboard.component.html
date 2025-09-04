@@ -1,0 +1,120 @@
+<div class="dashboard">
+    @if (isLoading) {
+  <div class="loading-state">
+    <div class="loading-spinner"></div>
+  </div>
+  } @else if (error) {
+  <div class="error-state">
+    <i class="fas fa-exclamation-triangle"></i>
+    <h3>{{ error }}</h3>
+    <p>Please check the URL or try again later.</p>
+  </div>
+  } @else if (projects) {
+  <!-- Statistics Cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="fas fa-project-diagram"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ totalProjects }}</h3>
+        <p>Total Projects</p>
+      </div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-icon">
+        <i class="fas fa-envelope"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ messages.length }}</h3>
+        <p>Total Messages</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon unread">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="stat-content">
+        <h3>{{ unreadMessagesCount }}</h3>
+        <p>Unread Messages</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="activity-grid">
+    <!-- Recent Messages -->
+    <div class="activity-card">
+      <div class="card-header">
+        <h3>Recent Messages</h3>
+        <a (click)="utilSer.navigateTo('/admin/messages')" class="view-all">View All</a>
+      </div>
+      <div class="card-content">
+        @if (recentMessages.length > 0) {
+          <div class="message-list">
+            @for (message of recentMessages; track message.id) {
+              <div class="message-item" [class.unread]="!message.read">
+                <div class="message-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="message-content">
+                  <div class="message-header">
+                    <h4>{{ message.name }}</h4>
+                    <span class="message-time">{{ getTimeAgo(message.timestamp) }}</span>
+                  </div>
+                  <p class="message-subject">{{ message.subject }}</p>
+                  <p class="message-preview">{{ message.message.substring(0, 60) }}...</p>
+                </div>
+                @if (!message.read) {
+                  <div class="unread-indicator"></div>
+                }
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>No messages yet</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Recent Projects -->
+    <div class="activity-card">
+      <div class="card-header">
+        <h3>Recent Projects</h3>
+        <a  (click)="utilSer.navigateTo('/admin/project')" class="view-all">View All</a>
+      </div>
+      <div class="card-content">
+        @if (projects.length > 0) {
+          <div class="project-list">
+            @for (project of projects.slice(0, 5); track project.id) {
+              <div class="project-item">
+                <div class="project-image">
+                  <img [src]="project.Images[0]" [alt]="project.title">
+                </div>
+                <div class="project-content">
+                  <h4>{{ project.title }}</h4>
+                  <p>{{ project.description.substring(0, 140) }}...</p>
+                  <div class="project-meta">
+                    <span class="project-category">{{ project.type }}</span>
+                    <span class="project-date">{{project.from}} - {{project.to}}</span>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <i class="fas fa-folder-open"></i>
+            <p>No projects yet</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
+</div>

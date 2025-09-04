@@ -1,0 +1,7 @@
+<div
+  class="custom-toast"
+  [ngStyle]="{ '--toast-background': 'var(--ion-color-' + color() + ')' }"
+>
+  <i class="icon" [ngClass]="icon()"></i>
+  <span class="text">{{ message() }}</span>
+</div>

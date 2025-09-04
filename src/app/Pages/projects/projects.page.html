@@ -4,102 +4,20 @@
     <p class="section-subtitle">A showcase of my recent work and achievements</p>
   </div>
 
-  <div class="filter-tabs fade-in">
-    <button
-      class="filter-btn"
-      [class.active]="activeFilter === 'all'"
-      (click)="setFilter('all')"
-    >
-      All Projects
-    </button>
-    <button
-      class="filter-btn"
-      [class.active]="activeFilter === 'mobile'"
-      (click)="setFilter('mobile')"
-    >
-      Mobile Apps
-    </button>
-    <button
-      class="filter-btn"
-      [class.active]="activeFilter === 'web'"
-      (click)="setFilter('web')"
-    >
-      Web Apps
-    </button>
-    <button
-      class="filter-btn"
-      [class.active]="activeFilter === 'backend'"
-      (click)="setFilter('backend')"
-    >
-      Backend
-    </button>
-  </div>
+ <div class="filter-tabs fade-in">
+  <button class="filter-btn" [class.active]="activeFilter === 'all'" (click)="setFilter('all')">
+    All
+  </button>
+  <button class="filter-btn" [class.active]="activeFilter === 'fullstack'" (click)="setFilter('fullstack')">
+    Full Stack
+  </button>
+  <button class="filter-btn" [class.active]="activeFilter === 'frontend'" (click)="setFilter('frontend')">
+    Frontend
+  </button>
+  <button class="filter-btn" [class.active]="activeFilter === 'mobile'" (click)="setFilter('mobile')">
+    Mobile Apps
+  </button>
+</div>
 
-  <div class="projects-grid">
-    @for(project of filteredProjects;track $index ;let i = $index){
-    <div
-      class="project-card fade-in"
-      [style.animation-delay]="(i * 0.1) + 's'"
-      [class.hidden]="!isProjectVisible(project)"
-    >
-      <div class="project-image">
-        <img [src]="project.image" [alt]="project.title" />
-        <div class="project-status">
-          <span class="status-badge" [class]="'status-' + project.status">
-            {{ project.status | titlecase }}
-          </span>
-        </div>
-      </div>
-
-      <div class="project-content">
-        <div class="project-header">
-          <h3 class="project-title">{{ project.title }}</h3>
-          <div class="project-category">
-            <i [class]="project.categoryIcon"></i>
-            <span>{{ project.category }}</span>
-          </div>
-        </div>
-
-        <p class="project-description">{{ project.description }}</p>
-
-        <div class="project-footer">
-          <div class="project-date">
-            <i class="fas fa-calendar-alt"></i>
-            <span>{{ project.date }}</span>
-          </div>
-          <div class="project-actions">
-            <a
-              [href]="project.liveUrl"
-              class="btn btn-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="fas fa-external-link-alt"></i>
-              Demo
-            </a>
-            <a
-              [href]="project.codeUrl"
-              class="btn btn-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i class="fab fa-github"></i>
-              Code
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  }
-  </div>
-
-  <div class="projects-cta fade-in">
-    <h3>Want to see more?</h3>
-    <p>Check out my GitHub profile for additional projects and contributions.</p>
-    <a href="#" class="btn btn-primary" target="_blank">
-      <i class="fab fa-github"></i>
-      View GitHub Profile
-    </a>
-  </div>
-  <app-footer/>
+  <app-project-cards [activeFilter]="activeFilter" [role]="'user'" />
 </section>

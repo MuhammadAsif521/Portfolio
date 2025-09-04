@@ -1,0 +1,219 @@
+@use '../../../theme/variables.scss' as *;
+
+.details-container{
+  padding: 4rem 0;
+}
+.project-header {
+  margin-bottom: 1.5rem;
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  p {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    span {
+      background: var(--surface);
+      border: solid 1px var(--border);
+      border-radius: var(--border-radius-md);
+      padding: 0.3rem 0.6rem;
+      margin: 0.2rem;
+      display: inline-block;
+    }
+  }
+}
+
+swiper-container {
+  height: 440px;
+  width: 90%;
+  margin: 0 auto 20px;
+
+  swiper-slide.custom-slide {
+   text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  swiper-slide.custom-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+}
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  color: var(--accent-success); 
+  font-size: 20px;
+}
+
+li::marker {
+  color: var(--accent-primary);
+}
+
+ul {
+  padding: 1rem;
+}
+
+li {
+  color: inherit;
+  margin-bottom: 0.5rem;
+}
+
+.main-content {
+  padding: 1.5rem;
+  margin: 2rem;
+  border-radius: var(--border-radius-md);
+  background: var(--surface);
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .platforms {
+    margin-top: 2rem;
+
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .platform-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--border-radius-xl);
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-primary);
+      border: solid 2px var(--border);
+      transition: var(--transition);
+
+      i {
+        font-size: 1.2rem;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      &.web {
+        background: var(--accent-primary);
+      }
+
+      &.android {
+        background: var(--accent-success);
+      }
+
+      &.ios {
+        background: var(--surface);
+      }
+    }
+  }
+
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem;
+
+  >div {
+    background: var(--surface);
+    padding: 1.5rem;
+    height: 450px;
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+  }
+
+  .technologies {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    .tech-state {
+      i {
+        font-size: 1.2rem;
+      }
+
+      span {
+        font-size: 1rem;
+        color: var(--text-primary);
+      }
+    }
+  }
+
+  .features {
+    h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+    }
+  }
+
+  .project-info {
+    display: grid;
+    >div {
+      h3 {
+        font-size: 1rem;
+        color: var(--accent-primary);
+      }
+
+      p {
+        font-size: 0.95rem;
+      }
+    }
+  }
+}
+.tech-state i.fab.fa-angular { color: #dd0031; }   
+.tech-state i.fab.fa-node-js { color: #68a063; }  
+.tech-state i.fas.fa-server { color: #333333; }   
+.tech-state i.fas.fa-database { color: #4db33d; }  
+.tech-state i.fas.fa-fire { color: #ffca28; }      
+.tech-state i.fas.fa-layer-group { color: #0081cb; } 
+.tech-state i.fas.fa-gem { color: #2196f3; }       
+.tech-state i.fas.fa-database.sql { color: #00758f; } 
+.tech-state i.fas.fa-database.sqlite { color: #003b57; } 
+
+ @include media-breakpoint-down(sm){
+  .grid , .main-content{
+    margin: 1rem;
+  }
+ }
+
+ .loading-state,
+.error-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  flex-direction: column;
+}
+.loading-spinner {
+  width: 100px;
+  height: 100px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--accent-primary);
+  border-bottom: 2px solid rgb(156, 85, 236);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}

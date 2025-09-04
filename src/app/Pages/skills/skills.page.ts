@@ -1,21 +1,24 @@
-import { Component, OnInit, AfterViewInit, ElementRef, inject } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, inject } from '@angular/core';
 import { FooterComponent } from "src/app/core/components/footer/footer.component";
+import { ScrollAnimationService } from 'src/app/core/components/scroll-animation';
 import { SkillCategory, Tool } from 'src/app/core/interfaces/core.interface';
+
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.page.html',
   styleUrls: ['./skills.page.scss'],
   imports: [FooterComponent]
 })
-export class SkillsPage implements OnInit, AfterViewInit {
+export class SkillsPage implements AfterViewInit {
 
-  private elementRef: ElementRef = inject (ElementRef);
+  private elementRef = inject(ElementRef);
+  private scrollAnim = inject(ScrollAnimationService);
 
   skillCategories: SkillCategory[] = [
     {
       name: 'Frontend Development',
       icon: 'fas fa-code',
-      level: 90,
+      level: 95,
       skills: [
         'Ionic Angular',
         'Capacitor',
@@ -24,13 +27,14 @@ export class SkillsPage implements OnInit, AfterViewInit {
         'Tailwind CSS',
         'SCSS',
         'HTML5',
-        'Responsive Design'
+        'Responsive Design',
+        'Animations & Micro-interactions'
       ]
     },
     {
       name: 'Backend Development',
       icon: 'fas fa-server',
-      level: 55,
+      level: 60,
       skills: [
         'Node.js',
         'Express.js',
@@ -68,7 +72,7 @@ export class SkillsPage implements OnInit, AfterViewInit {
     {
       name: 'Cloud & DevOps',
       icon: 'fas fa-cloud',
-      level: 75,
+      level: 70,
       skills: [
         'Firebase',
         'Google Cloud',
@@ -89,6 +93,18 @@ export class SkillsPage implements OnInit, AfterViewInit {
         'Payment Gateways',
         'Barcode/QR Scanning'
       ]
+    },
+    {
+      name: 'Soft Skills',
+      icon: 'fas fa-users',
+      level: 90,
+      skills: [
+        'Teamwork & Collaboration',
+        'Effective Communication',
+        'Problem-solving & Critical Thinking',
+        'Adaptability & Learning',
+        'Time Management & Deadlines'
+      ]
     }
   ];
 
@@ -103,60 +119,12 @@ export class SkillsPage implements OnInit, AfterViewInit {
     { name: 'npm/yarn', icon: 'fab fa-npm' }
   ];
 
-  // certifications: Certification[] = [
-  //   {
-  //     title: 'Angular Certified Developer',
-  //     issuer: 'Google Angular Team',
-  //     year: '2023',
-  //     icon: 'fab fa-angular'
-  //   },
-  //   {
-  //     title: 'Firebase Certified',
-  //     issuer: 'Google Cloud',
-  //     year: '2023',
-  //     icon: 'fas fa-fire'
-  //   },
-  //   {
-  //     title: 'Node.js Application Development',
-  //     issuer: 'OpenJS Foundation',
-  //     year: '2022',
-  //     icon: 'fab fa-node-js'
-  //   },
-  //   {
-  //     title: 'Mobile App Development',
-  //     issuer: 'Ionic Framework',
-  //     year: '2024',
-  //     icon: 'fas fa-mobile-alt'
-  //   }
-  // ];
-
-  ngOnInit(): void {}
-
   ngAfterViewInit(): void {
-    this.setupScrollAnimations();
-  }
-
-  private setupScrollAnimations(): void {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-
-          // Trigger skill level animations
-          if (entry.target.classList.contains('skill-category')) {
-            this.animateSkillLevel(entry.target);
-          }
-        }
-      });
-    }, observerOptions);
-
-    const fadeElements = this.elementRef.nativeElement.querySelectorAll('.fade-in');
-    fadeElements.forEach((el: Element) => observer.observe(el));
+    this.scrollAnim.observeFadeIn(this.elementRef, (el: Element) => {
+      if (el.classList.contains('skill-category')) {
+        this.animateSkillLevel(el);
+      }
+    });
   }
 
   private animateSkillLevel(element: Element): void {
@@ -164,7 +132,6 @@ export class SkillsPage implements OnInit, AfterViewInit {
     if (levelFill) {
       const targetWidth = levelFill.style.width;
       levelFill.style.width = '0';
-
       setTimeout(() => {
         levelFill.style.width = targetWidth;
       }, 300);

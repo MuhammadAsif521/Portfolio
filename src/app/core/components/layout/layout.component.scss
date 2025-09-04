@@ -1,58 +1,37 @@
 @use '../../../../theme/variables.scss' as *;
 
-
-/* =========================
-   Router outlet transitions
-   ========================= */
-ion-router-outlet {
-    display: block;
-    will-change: transform, opacity;
-
-    &.hidden {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-    }
-
-    &:not(.hidden) {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.7s ease;
-    }
-}
-
-/* =========================
-   Animations
-   ========================= */
-@keyframes fadePageIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 #main-content {
-    height: 100vh;
-    width: 100%;
-
-    ion-router-outlet {
-        width: 100%;
-        height: 100%;
-
-        &.animate-in {
-            animation: fadePageIn 0.5s cubic-bezier(0.76, -0.14, 1, 1);
-        }
-    }
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
+.router-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+}
 
+// Ensure footer stays at bottom during animations
+app-footer {
+  margin-top: auto;
+  z-index: 10; // Higher than route animation content
+  position: relative;
+  background: var(--glass-bg);
+}
+
+// Optional mobile tweaks
 @include media-breakpoint-down(sm) {
-    #main-content {
-        margin-top: 40px;
-    }
+  #main-content {
+    margin-top: 40px;
+  }
 }

@@ -13,7 +13,7 @@ $dark-theme: (
   text-primary: #ffffff,
   text-secondary: #e2e8f0,
   text-muted: #94a3b8,
-  
+  text-danger:#ec1919e1,
   // Accent colors
   accent-primary: #6366f1,
   accent-secondary: #8b5cf6,
@@ -126,5 +126,25 @@ $breakpoints: (
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+.section , .project-details-page {
+  max-width: 100%;
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto;
+
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(600px circle at 20% 30%, rgba(98, 100, 250, 0.15), transparent 50%),
+      radial-gradient(800px circle at 80% 70%, rgba(139, 92, 246, 0.15), transparent 50%),
+      radial-gradient(400px circle at 40% 90%, rgba(6, 182, 212, 0.1), transparent 50%);
+    z-index: -2;
   }
 }

@@ -1,3 +1,5 @@
+import { Timestamp } from "@angular/fire/firestore";
+
 // skills-page interfaces
 export interface SkillCategory {
   name: string;
@@ -29,17 +31,49 @@ export interface TimelineItem {
   date: string;
   description: string;
 }
-// projects-page interfaces
-export interface Project {
+// footer-component interfaces
+export interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+// firebase service
+export interface AdminUser {
+  uid: string;
+  email: string;
+  displayName?: string;
+  role: 'admin';
+}
+
+export interface Projects {
+  id: string;
   title: string;
+  type: string;
+  status: string;
+  members: number;
+  clientname:string;
+  liveUrl?: string;
+  codeUrl?: string;
+  framework: string[];
+  from: string;
+  to?: string;
+  availibillty: string[];
+  'availibillty-urls': string[];
+  technologies: string[];
   description: string;
-  features: string[];
-  tags: string[];
-  category: 'mobile' | 'web' | 'backend' | 'fullstack';
-  categoryIcon: string;
-  image: string;
-  liveUrl: string;
-  codeUrl: string;
-  status: 'completed' | 'ongoing' | 'planning';
-  date: string;
+  role: string[];
+  keyfeatures: string[];
+  Images: string[]; // URLs of the uploaded images
+  createdAt: Date | Timestamp | null;
+  updatedAt: Date | Timestamp | null;
+}
+
+export interface Message {
+  id: string; // The Firestore document ID
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  read: boolean;
+  timestamp: Date;
 }

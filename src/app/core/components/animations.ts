@@ -1,7 +1,16 @@
-import { trigger, transition, style, query, animate, group, sequence } from '@angular/animations';
+import {
+  trigger,
+  transition,
+  style,
+  query,
+  animate,
+  group,
+  sequence
+} from '@angular/animations';
 
 export const routeFadeAnimation = trigger('routeFadeAnimation', [
   transition('* <=> *', [
+    // set container
     query(':enter, :leave', [
       style({
         position: 'absolute',
@@ -9,16 +18,23 @@ export const routeFadeAnimation = trigger('routeFadeAnimation', [
         left: 0,
         right: 0,
         width: '100%',
-        zIndex: 1
+        height: '100%',
+        zIndex: 0
       })
     ], { optional: true }),
+
+    // enter start state
     query(':enter', [
       style({ opacity: 0 })
     ], { optional: true }),
+
     sequence([
+      // footer out
       query('app-footer', [
         animate('200ms ease', style({ opacity: 0, transform: 'translateY(10px)' }))
       ], { optional: true }),
+
+      // page swap
       group([
         query(':leave', [
           animate('300ms ease', style({ opacity: 0 }))
@@ -28,6 +44,8 @@ export const routeFadeAnimation = trigger('routeFadeAnimation', [
           animate('300ms ease', style({ opacity: 1 }))
         ], { optional: true })
       ]),
+
+      // footer in
       query('app-footer', [
         animate('200ms ease', style({ opacity: 1, transform: 'translateY(0)' }))
       ], { optional: true })

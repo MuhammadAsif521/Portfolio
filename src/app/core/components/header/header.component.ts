@@ -13,9 +13,11 @@ export class HeaderComponent implements OnInit {
   public utilSer = inject(UtilityService);
   private router = inject(Router);
 
-  isMobileMenuOpen = false;
-  isScrolled = false;
-  activeRoute = '/home';
+  public isMobileMenuOpen = false;
+  public isScrolled = false;
+  public activeRoute = '/home';
+  public touchStartX = 0;
+  public touchEndX = 0;
 
   ngOnInit(): void {
     this.setActiveRoute(this.router.url);
@@ -66,4 +68,26 @@ export class HeaderComponent implements OnInit {
     this.utilSer.navigateTo(route);
     this.isMobileMenuOpen = false;
   }
+
+
+  @HostListener('document:touchstart', ['$event'])
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  }
+
+  @HostListener('document:touchend', ['$event'])
+  onTouchEnd(event: TouchEvent) {
+    this.touchEndX = event.changedTouches[0].screenX;
+    this.handleSwipe();
+  }
+  private handleSwipe(): void {
+    const swipeDistance = this.touchEndX - this.touchStartX;
+    if (swipeDistance > 80 && !this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = true;
+    }
+    if (swipeDistance < -80 && this.isMobileMenuOpen) {
+      this.isMobileMenuOpen = false;
+    }
+  }
+
 }

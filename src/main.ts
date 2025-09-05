@@ -7,10 +7,16 @@ import { AppComponent } from './app/app.component';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { register } from 'swiper/element/bundle';
-import { environment } from './environments/environment';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { register } from 'swiper/element/bundle';
+
+import { firstValueFrom } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { environment } from './environments/environment';
+import { ApplicationRef } from '@angular/core';
+
 register();
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -22,4 +28,25 @@ bootstrapApplication(AppComponent, {
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-});
+})
+  .then(appRef => {
+    const loader = document.getElementById('global-loader');
+    if (!loader) return;
+
+    try {
+      const applicationRef = appRef.injector.get(ApplicationRef);
+      // wait until Angular is stable
+      firstValueFrom(applicationRef.isStable.pipe(filter(stable => stable)))
+        .then(() => {
+          loader.classList.add('fade-out');
+          setTimeout(() => loader.remove(), 320);
+        });
+    } catch {
+      loader.remove();
+    }
+  })
+  .catch(err => {
+    const loader = document.getElementById('global-loader');
+    if (loader) loader.remove();
+    console.error(err);
+  });

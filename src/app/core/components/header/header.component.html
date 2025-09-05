@@ -27,12 +27,11 @@
         <li (click)="setActive('/blogs')">
           <a [class.active]="activeRoute === '/blogs'">Blogs</a>
         </li>
-        <!-- <li (click)="setActive('/admin/login')">
-          <a [class.active]="activeRoute === '/admin/login'">Admin</a>
-        </li> -->
       </ul>
     </nav>
-
+    @if (isMobileMenuOpen) {
+  <div class="overlay"></div>
+    }
     <div class="mobile-menu" [class.active]="isMobileMenuOpen" (click)="toggleMobileMenu()">
       <span></span>
       <span></span>

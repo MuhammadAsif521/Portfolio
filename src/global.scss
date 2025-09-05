@@ -18,30 +18,67 @@
 
 /* For Webkit browsers (Chrome, Edge, Safari) */
 * {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
 }
 
 *::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
+  /* Chrome, Safari */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading) !important;
 }
-p{
+
+p {
   font-family: var(--font-primary) !important;
 }
+
 body {
   font-family: var(--font-primary);
-  background-color: #0a0f1c; /* Fallback for dark theme */
-  color: #ffffff; /* Fallback for dark theme */
+  background-color: #0a0f1c;
+  /* Fallback for dark theme */
+  color: #ffffff;
+  /* Fallback for dark theme */
 }
 
 .custom-toast-container {
   position: fixed;
-  top: 30px;            
-  right: 20px;          
-  z-index: 9999;              
-  max-width: 90vw;         
+  top: 30px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 90vw;
+}
+
+#global-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0f1c;
+  z-index: 9999;
+
+  &.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .loading-spinner {
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--accent-primary);
+    border-bottom: 2px solid rgb(156, 85, 236);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
 }

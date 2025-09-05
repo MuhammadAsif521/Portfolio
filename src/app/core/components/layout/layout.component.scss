@@ -34,3 +34,20 @@ app-footer {
     margin-top: 40px;
   }
 }
+.offline-banner {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-danger);
+  font-size: 22px;
+  font-family: cursive , sans-serif;
+  font-weight: 500;
+  z-index: 1000;
+}
+.offline-banner svg path,
+.offline-banner svg circle {
+  stroke: var(--text-danger);
+}

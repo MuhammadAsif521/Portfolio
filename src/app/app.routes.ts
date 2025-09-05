@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { adminroutes } from './core/components/admin.routes';
 
 export const routes: Routes = [
   {
@@ -50,6 +49,5 @@ export const routes: Routes = [
       },
     ],
   },
-  ...adminroutes,
 ];
 

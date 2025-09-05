@@ -11,9 +11,6 @@
 @use '@ionic/angular/css/flex-utils.css';
 @use '@fortawesome/fontawesome-free/css/all.min.css';
 
-/* Import your custom admin styles */
-@use '../src/app/Admin/admin-styles' as *;
-
 /* Global styles should follow */
 * {
   user-select: none;

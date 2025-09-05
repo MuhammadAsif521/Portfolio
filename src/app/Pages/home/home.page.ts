@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, inject, ElementRef } from '@angular/core';
-import { FooterComponent } from "src/app/core/components/footer/footer.component";
 import { ScrollAnimationService } from 'src/app/core/components/scroll-animation';
 
 @Component({
@@ -7,7 +6,7 @@ import { ScrollAnimationService } from 'src/app/core/components/scroll-animation
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  imports: [FooterComponent],
+  imports: [],
 })
 export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   private scrollAnim = inject(ScrollAnimationService);

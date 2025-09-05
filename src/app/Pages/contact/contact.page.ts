@@ -1,9 +1,9 @@
 import { Component, AfterViewInit, ElementRef, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FirebaseService } from '../../Admin/Server/firebase.service';
-import { FormControlComponent } from "src/app/Admin/Pages/form-control/form-control.component";
-import { ToastService, ErrorHandlerService } from 'src/app/Admin/Server/toast.service';
+import { FormControlComponent } from 'src/app/core/components/form-control/form-control.component';
 import { ScrollAnimationService } from 'src/app/core/components/scroll-animation';
+import { FirebaseService } from 'src/app/core/Services/firebase.service';
+import { ToastService, ErrorHandlerService } from 'src/app/core/Services/toast.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +11,7 @@ import { ScrollAnimationService } from 'src/app/core/components/scroll-animation
   styleUrls: ['./contact.page.scss'],
   imports: [ReactiveFormsModule, FormControlComponent]
 })
-export class ContactPage implements  AfterViewInit {
+export class ContactPage implements AfterViewInit {
   private elementRef = inject(ElementRef);
   private scrollAnim = inject(ScrollAnimationService);
   private toastSer = inject(ToastService);
@@ -32,26 +32,25 @@ export class ContactPage implements  AfterViewInit {
       );
       return;
     }
+
     this.isSubmitting = true;
-    try {
-      const formData = this.contactForm.value;
-      this.firebaseService.addMessage(formData).subscribe({
-        next: () => {
-          this.toastSer.showToast(
-            'fas fa-check-circle',
-            'Message sent successfully!',
-            'success'
-          );
-         this.contactForm.reset();
-        },
-        error: (error) => {
-          this.errorToast.handleError(error);
-        }
-      });
-    } catch (error) {
-      this.errorToast.handleError('Something went wrong. Please try again later.',);
-    } finally {
-      this.isSubmitting = false;
-    }
+    const formData = this.contactForm.value;
+
+    this.firebaseService.addMessage(formData).subscribe({
+      next: () => {
+        this.toastSer.showToast(
+          'fas fa-check-circle',
+          'Message sent successfully!',
+          'success'
+        );
+        this.contactForm.reset();
+        this.isSubmitting = false; // stop spinner on success
+      },
+      error: (error) => {
+        this.errorToast.handleError(error);
+        this.isSubmitting = false; // stop spinner on error
+      }
+    });
   }
+
 }

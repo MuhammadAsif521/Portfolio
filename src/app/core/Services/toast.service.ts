@@ -6,7 +6,7 @@ import {
   createComponent,
   inject,
 } from '@angular/core';
-import { CustomToastComponent } from '../Pages/custom-toast/custom-toast.component';
+import { CustomToastComponent } from '../components/custom-toast/custom-toast.component';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {

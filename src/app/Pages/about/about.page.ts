@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit, ElementRef, inject } from '@angular/core';
-import { FooterComponent } from "src/app/core/components/footer/footer.component";
 import { ScrollAnimationService } from 'src/app/core/components/scroll-animation';
 import { Stat } from 'src/app/core/interfaces/core.interface';
 
@@ -8,7 +7,7 @@ import { Stat } from 'src/app/core/interfaces/core.interface';
   standalone: true,
   templateUrl: './about.page.html',
   styleUrls: ['./about.page.scss'],
-  imports: [FooterComponent]
+  imports: []
 })
 export class AboutPage implements OnInit, AfterViewInit {
   private elementRef = inject(ElementRef);

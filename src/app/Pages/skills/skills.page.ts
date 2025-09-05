@@ -1,5 +1,4 @@
 import { Component, AfterViewInit, ElementRef, inject } from '@angular/core';
-import { FooterComponent } from "src/app/core/components/footer/footer.component";
 import { ScrollAnimationService } from 'src/app/core/components/scroll-animation';
 import { SkillCategory, Tool } from 'src/app/core/interfaces/core.interface';
 
@@ -7,7 +6,7 @@ import { SkillCategory, Tool } from 'src/app/core/interfaces/core.interface';
   selector: 'app-skills',
   templateUrl: './skills.page.html',
   styleUrls: ['./skills.page.scss'],
-  imports: [FooterComponent]
+  imports: []
 })
 export class SkillsPage implements AfterViewInit {
 

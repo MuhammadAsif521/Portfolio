@@ -34,14 +34,12 @@
     <div class="project-image">
       <img [src]="project.Images[0]" [alt]="project.title"  />
 
-      <!-- Details Overlay -->
-      @if (!isAdmin) {
-      <div class="image-overlay">
+     <div class="image-overlay">
           <button class="btn btn-outline" (click)="utilSer.navigateToWithData('project-details/' + project.id, project)">
           <i class="fas fa-info-circle"></i> Details
         </button>
       </div>
-    }
+    
       <!-- Status -->
       <div class="project-status">
         <span class="status-badge" [class]="'status-' + project.status"
@@ -49,18 +47,6 @@
           {{ project.status }}
         </span>
       </div>
-
-      <!-- Admin Actions -->
-      @if (isAdmin) {
-      <div class="admin-actions">
-        <button class="icon-btn warning" (click)="onEditProject(project)" title="Edit Project">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button class="icon-btn danger" (click)="onDeleteProject(project)" title="Delete Project">
-          <i class="fas fa-trash"></i>
-        </button>
-      </div>
-      }
     </div>
 
     <!-- Project Content -->

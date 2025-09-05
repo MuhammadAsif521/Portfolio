@@ -1,9 +1,9 @@
 import { Component, input, InputSignal, OnInit, OnDestroy, inject, computed, signal } from '@angular/core';
 import { Subject, takeUntil, startWith } from 'rxjs';
-import { FirebaseService } from 'src/app/Admin/Server/firebase.service';
 import { Projects } from '../../interfaces/core.interface';
 import { UtilityService } from '../../Services/utility.service';
 import { Router } from '@angular/router';
+import { FirebaseService } from '../../Services/firebase.service';
 
 @Component({
   standalone: true,
@@ -19,7 +19,6 @@ export class ProjectCardsComponent implements OnInit, OnDestroy {
 
   // Inputs
   public activeFilter: InputSignal<string> = input('all');
-  public role: InputSignal<'admin' | 'user'> = input<'admin' | 'user'>('user');
 
   // State
   public projects = signal<Projects[]>([]);
@@ -83,36 +82,9 @@ export class ProjectCardsComponent implements OnInit, OnDestroy {
         },
       });
   }
-
-  // Actions
-  onEditProject(project: Projects): void {
-    if (project.id) {
-      this.utilSer.navigateTo(`/admin/edit-project/${project.id}`);
-    }
-  }
-
-  onDeleteProject(project: Projects): void {
-    if (!project.id) return;
-    if (!confirm(`Delete "${project.title}"?`)) return;
-
-    const current = this.projects();
-    this.projects.set(current.filter((p) => p.id !== project.id));
-
-    this.firebaseService
-      .deleteProject(project.id)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        error: () => {
-          this.projects.set(current);
-          this.error.set('Failed to delete project. Please try again.');
-        },
-      });
-  }
-
   refreshProjects(): void {
     this.loadProjects(true);
   }
-
   // Utilities
   getStatusColor(status: string): string {
     const statusColors: Record<string, string> = {
@@ -122,33 +94,23 @@ export class ProjectCardsComponent implements OnInit, OnDestroy {
     };
     return statusColors[status];
   }
-
   trackByProjectId(index: number, project: Projects): string {
     return project.id || index.toString();
   }
-
   // Getters for template
   get isLoading(): boolean {
     return this.loading();
   }
-
   get hasError(): boolean {
     return !!this.error();
   }
-
   get errorMessage(): string | null {
     return this.error();
   }
-
   get hasProjects(): boolean {
     return this.projects().length > 0;
   }
-
   get hasFilteredProjects(): boolean {
     return this.filteredProjects().length > 0;
-  }
-
-  get isAdmin(): boolean {
-    return this.role() === 'admin';
   }
 }

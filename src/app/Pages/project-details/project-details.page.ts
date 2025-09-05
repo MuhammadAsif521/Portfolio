@@ -1,9 +1,9 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirebaseService } from '../../Admin/Server/firebase.service';
+import { FirebaseService } from 'src/app/core/Services/firebase.service';
+import { ErrorHandlerService } from 'src/app/core/Services/toast.service';
 import { UtilityService } from 'src/app/core/Services/utility.service';
 import { Projects } from 'src/app/core/interfaces/core.interface';
-import { ErrorHandlerService } from 'src/app/Admin/Server/toast.service';
 
 @Component({
   selector: 'app-project-details',

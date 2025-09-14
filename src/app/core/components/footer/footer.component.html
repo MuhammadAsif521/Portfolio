@@ -3,9 +3,14 @@
     <!-- Social Links Section -->
     <div class="footer-social">
       @for(social of socialLinks; track $index){
-      <a [href]="social.url" [title]="social.name" target="_blank" rel="noopener noreferrer">
-        <i [class]="social.icon"></i>
-      </a>
+       <a 
+          [href]="social.name === 'Email' ? getEmailLink() : social.url" 
+          [title]="social.name" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          <i [class]="social.icon"></i>
+        </a>
       }
     </div>
 

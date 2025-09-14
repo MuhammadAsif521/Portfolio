@@ -1,49 +1,77 @@
+import { NgClass } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirebaseService } from 'src/app/core/Services/firebase.service';
+import { ApiService } from 'src/app/core/Services/api.service';
 import { ErrorHandlerService } from 'src/app/core/Services/toast.service';
 import { UtilityService } from 'src/app/core/Services/utility.service';
-import { Projects } from 'src/app/core/interfaces/core.interface';
+import { Project } from 'src/app/core/interfaces/core.interface';
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.page.html',
   styleUrls: ['./project-details.page.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [NgClass],
   standalone: true,
 })
 export class ProjectDetailsPage implements OnInit {
   public utilSer = inject(UtilityService);
   private route = inject(ActivatedRoute);
   private errorSer = inject(ErrorHandlerService);
-  private firebaseService = inject(FirebaseService);
-  public project: Projects | null = null;
+  private publicApi = inject(ApiService);
+
+  public project!: Project;
   public isLoading = true;
   public error: string | null = null;
 
-  ngOnInit(): void {
-    const projectId = this.route.snapshot.paramMap.get('id');
-    if (projectId) {
-      this.firebaseService.getProject(projectId).subscribe({
-        next: (projectData) => {
-          if (projectData) {
-            this.project = { ...projectData, id: projectId };
-            this.isLoading = false;
-          } else {
-            this.errorSer.handleError('Project not found.');
-            this.isLoading = false;
+public descriptionParts: string[] = [];
+
+ngOnInit(): void {
+  const projectId = this.route.snapshot.paramMap.get('id');
+  if (projectId) {
+    this.publicApi.getProjectById(projectId).subscribe({
+      next: (res) => {
+        if (res.project) {
+          this.project = { ...res.project, id: projectId };
+
+          if (this.project.description) {
+            const maxCharsPerParagraph = 700; // approx. 5 lines
+            let desc = this.project.description.trim();
+            let start = 0;
+
+            this.descriptionParts = [];
+
+            while (start < desc.length) {
+              // Take a substring
+              let chunk = desc.slice(start, start + maxCharsPerParagraph);
+
+              // Try to break at the last period inside the chunk for clean sentences
+              const lastPeriod = chunk.lastIndexOf('.');
+              const splitIndex = lastPeriod > 0 ? lastPeriod + 1 : chunk.length;
+
+              this.descriptionParts.push(chunk.slice(0, splitIndex).trim());
+              start += splitIndex;
+            }
           }
-        },
-        error: (err) => {
-          this.errorSer.handleError('Failed to load project details. Please try again later.');
+
+          this.isLoading = false;
+        } else {
+          this.errorSer.handleError('Project not found.');
           this.isLoading = false;
         }
-      });
-    } else {
-      this.errorSer.handleError('Invalid project ID provided.');
-      this.isLoading = false;
-    }
+      },
+      error: () => {
+        this.errorSer.handleError('Failed to load project details. Please try again later.');
+        this.isLoading = false;
+      }
+    });
+  } else {
+    this.errorSer.handleError('Invalid project ID provided.');
+    this.isLoading = false;
   }
+}
+
+
 
   getPlatformIcon(platform: string): string {
     switch (platform.toLowerCase()) {
@@ -53,6 +81,7 @@ export class ProjectDetailsPage implements OnInit {
       default: return 'fas fa-link';
     }
   }
+
   getTechIcon(tech: string): string {
     switch (tech.toLowerCase()) {
       case 'angular': return 'fab fa-angular';
@@ -67,4 +96,15 @@ export class ProjectDetailsPage implements OnInit {
       default: return 'fas fa-code';
     }
   }
+  getFrameworkClass(name: string): string {
+    const map: Record<string, string> = {
+      'Mean Stack': 'mean-stack',
+      'Ionic': 'ionic',
+      'Capacitor': 'capacitor',
+      'Cordova': 'cordova'
+    };
+
+    return map[name] || 'default-framework';
+  }
+
 }

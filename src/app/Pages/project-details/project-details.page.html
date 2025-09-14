@@ -10,12 +10,13 @@
       <h1>{{ project.title }}</h1>
       <p>
         @for (framework of project.framework; track $index) {
-        <span>{{framework}}</span>
+        <span [ngClass]="getFrameworkClass(framework)">{{framework}}</span>
         }
       </p>
     </div>
 
-    <swiper-container [breakpoints]="{ '280': { 'slidesPerView': 1 } }" [pagination]="true" [navigation]="true">
+    <swiper-container effect="fade" [breakpoints]="{ '280': { 'slidesPerView': 1 } }" [pagination]="true"
+      [navigation]="true">
       @for (img of project.Images; track $index) {
       <swiper-slide class="custom-slide">
         <img [src]="img" alt="">
@@ -27,7 +28,11 @@
     <div class="project-body">
       <div class="main-content">
         <h2>Project Overview</h2>
-        <p>{{ project.description }}</p>
+        @for(part of descriptionParts; track $index){
+        <p>
+          {{ part }}
+        </p>
+        }
         <h2>My Role</h2>
         <ul>
           @for (role of project.role; track $index) {
@@ -38,7 +43,7 @@
           <h2>Platform Availability</h2>
           <div class="buttons">
             @for (platform of project.availibillty;track $index) {
-            <a class="platform-btn {{ platform.toLowerCase()}}" [href]="project['availibillty-urls'][$index]">
+            <a class="platform-btn {{ platform.toLowerCase()}}" [href]="project.availibilltyUrls[$index]">
               <i [class]="getPlatformIcon(platform)"></i>
               {{ platform }}
             </a>

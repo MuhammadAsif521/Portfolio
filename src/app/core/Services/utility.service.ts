@@ -1,7 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular/standalone';
-import { Projects } from '../interfaces/core.interface';
 
 
 @Injectable({

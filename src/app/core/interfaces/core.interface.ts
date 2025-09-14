@@ -1,5 +1,3 @@
-import { Timestamp } from "@angular/fire/firestore";
-
 // skills-page interfaces
 export interface SkillCategory {
   name: string;
@@ -37,43 +35,53 @@ export interface SocialLink {
   url: string;
   icon: string;
 }
-// firebase service
-export interface AdminUser {
-  uid: string;
-  email: string;
-  displayName?: string;
-  role: 'admin';
-}
-
-export interface Projects {
-  id: string;
+// Api service
+export interface Project {
+  _id: string;
   title: string;
   type: string;
-  status: string;
+  status: 'completed' | 'in-progress' | 'planned';
   members: number;
-  clientname:string;
+  clientname: string;
   liveUrl?: string;
   codeUrl?: string;
   framework: string[];
   from: string;
   to?: string;
   availibillty: string[];
-  'availibillty-urls': string[];
+  availibilltyUrls: string[];
   technologies: string[];
   description: string;
   role: string[];
   keyfeatures: string[];
-  Images: string[]; // URLs of the uploaded images
-  createdAt: Date | Timestamp | null;
-  updatedAt: Date | Timestamp | null;
+  Images: string[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Message {
-  id: string; // The Firestore document ID
+  _id: string;
   name: string;
   email: string;
-  subject: string;
+  subject?: string;
   message: string;
   read: boolean;
-  timestamp: Date;
+  notificationSent: boolean;
+  source: 'website' | 'mobile' | 'api';
+  timestamp: string | Date; 
+  ipAddress?: string;
+  userAgent?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AuthResponse {
+  success: boolean;
+  token: string;
+}
+
+export interface ApiResponse<T> {
+  success: boolean;
+  message?: string;
+  data?: T;
 }

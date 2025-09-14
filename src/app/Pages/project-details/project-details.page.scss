@@ -1,38 +1,65 @@
 @use '../../../theme/variables.scss' as *;
 
-.details-container{
+.details-container {
   padding: 4rem 0;
 }
+
 .project-header {
   margin-bottom: 1.5rem;
+  text-align: center;
+
   h1 {
-    text-align: center;
     font-size: 2rem;
+    display: inline-block;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6, #06b6d4);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
 
   p {
-    text-align: center;
     display: flex;
     justify-content: center;
 
     span {
-      background: var(--surface);
-      border: solid 1px var(--border);
-      border-radius: var(--border-radius-md);
+      letter-spacing: 1px;
+      border-radius: var(--border-radius-sm);
       padding: 0.3rem 0.6rem;
       margin: 0.2rem;
       display: inline-block;
     }
   }
+
+  .mean-stack {
+    background: #4caf50;
+  }
+
+  .ionic {
+    background: #3880ff;
+  }
+
+  .capacitor {
+    background: #06b6d4;
+  }
+
+  .cordova {
+    background: #444;
+  }
 }
 
 swiper-container {
-  height: 440px;
-  width: 90%;
+  width: 100%;
+  height: 70vh;
   margin: 0 auto 20px;
 
+  @include media-breakpoint-down(sm) {
+    height: 45vh;
+  }
+
   swiper-slide.custom-slide {
-   text-align: center;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,10 +72,18 @@ swiper-container {
     object-fit: fill;
   }
 }
+
 swiper-container::part(button-prev),
 swiper-container::part(button-next) {
-  color: var(--accent-success); 
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-size: 20px;
+
+  &:hover {
+    color: #dd0031;
+  }
 }
 
 li::marker {
@@ -69,6 +104,8 @@ li {
   margin: 2rem;
   border-radius: var(--border-radius-md);
   background: var(--surface);
+  border: solid 1px var(--border);
+  box-shadow: 0 4px 12px rgba(152, 240, 255, 0.315);
 
   h2 {
     font-size: 2rem;
@@ -141,8 +178,7 @@ li {
     padding: 1.5rem;
     height: 450px;
     border-radius: var(--border-radius-md);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(152, 240, 255, 0.315);
   }
 
   .technologies {
@@ -172,6 +208,7 @@ li {
 
   .project-info {
     display: grid;
+
     >div {
       h3 {
         font-size: 1rem;
@@ -184,23 +221,52 @@ li {
     }
   }
 }
-.tech-state i.fab.fa-angular { color: #dd0031; }   
-.tech-state i.fab.fa-node-js { color: #68a063; }  
-.tech-state i.fas.fa-server { color: #333333; }   
-.tech-state i.fas.fa-database { color: #4db33d; }  
-.tech-state i.fas.fa-fire { color: #ffca28; }      
-.tech-state i.fas.fa-layer-group { color: #0081cb; } 
-.tech-state i.fas.fa-gem { color: #2196f3; }       
-.tech-state i.fas.fa-database.sql { color: #00758f; } 
-.tech-state i.fas.fa-database.sqlite { color: #003b57; } 
 
- @include media-breakpoint-down(sm){
-  .grid , .main-content{
+.tech-state i.fab.fa-angular {
+  color: #dd0031;
+}
+
+.tech-state i.fab.fa-node-js {
+  color: #68a063;
+}
+
+.tech-state i.fas.fa-server {
+  color: #333333;
+}
+
+.tech-state i.fas.fa-database {
+  color: #4db33d;
+}
+
+.tech-state i.fas.fa-fire {
+  color: #ffca28;
+}
+
+.tech-state i.fas.fa-layer-group {
+  color: #0081cb;
+}
+
+.tech-state i.fas.fa-gem {
+  color: #2196f3;
+}
+
+.tech-state i.fas.fa-database.sql {
+  color: #00758f;
+}
+
+.tech-state i.fas.fa-database.sqlite {
+  color: #003b57;
+}
+
+@include media-breakpoint-down(sm) {
+
+  .grid,
+  .main-content {
     margin: 1rem;
   }
- }
+}
 
- .loading-state,
+.loading-state,
 .error-state {
   display: flex;
   justify-content: center;
@@ -208,6 +274,7 @@ li {
   height: 80vh;
   flex-direction: column;
 }
+
 .loading-spinner {
   width: 100px;
   height: 100px;

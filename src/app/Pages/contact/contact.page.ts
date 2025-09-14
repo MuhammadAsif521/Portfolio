@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ElementRef, inject } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormControlComponent } from 'src/app/core/components/form-control/form-control.component';
 import { ScrollAnimationService } from 'src/app/core/components/scroll-animation';
-import { FirebaseService } from 'src/app/core/Services/firebase.service';
+import { ApiService } from 'src/app/core/Services/api.service';
 import { ToastService, ErrorHandlerService } from 'src/app/core/Services/toast.service';
 
 @Component({
@@ -16,13 +16,15 @@ export class ContactPage implements AfterViewInit {
   private scrollAnim = inject(ScrollAnimationService);
   private toastSer = inject(ToastService);
   private errorToast = inject(ErrorHandlerService);
-  private firebaseService: FirebaseService = inject(FirebaseService);
+  private publicApi = inject(ApiService);
 
   contactForm: FormGroup = new FormGroup({});
   isSubmitting = false;
+
   ngAfterViewInit(): void {
     this.scrollAnim.observeFadeIn(this.elementRef);
   }
+
   async onSubmit(): Promise<void> {
     if (this.contactForm.invalid) {
       this.toastSer.showToast(
@@ -36,7 +38,7 @@ export class ContactPage implements AfterViewInit {
     this.isSubmitting = true;
     const formData = this.contactForm.value;
 
-    this.firebaseService.addMessage(formData).subscribe({
+    this.publicApi.sendMessage(formData).subscribe({
       next: () => {
         this.toastSer.showToast(
           'fas fa-check-circle',
@@ -44,13 +46,12 @@ export class ContactPage implements AfterViewInit {
           'success'
         );
         this.contactForm.reset();
-        this.isSubmitting = false; // stop spinner on success
+        this.isSubmitting = false;
       },
       error: (error) => {
         this.errorToast.handleError(error);
-        this.isSubmitting = false; // stop spinner on error
+        this.isSubmitting = false;
       }
     });
   }
-
 }

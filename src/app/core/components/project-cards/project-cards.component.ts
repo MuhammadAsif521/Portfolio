@@ -88,9 +88,9 @@ export class ProjectCardsComponent implements OnInit, OnDestroy {
 
   getStatusColor(status: string): string {
     const statusColors: Record<string, string> = {
-      Completed: '#10b981',
-      'In-Progress': '#f59e0b',
-      Planned: '#6366f1',
+      completed: '#10b981',
+      'in-progress': '#f59e0b',
+      planned: '#6366f1',
     };
     return statusColors[status] || '#999';
   }

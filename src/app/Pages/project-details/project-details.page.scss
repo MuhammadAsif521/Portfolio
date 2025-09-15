@@ -127,7 +127,6 @@ li {
 
     .buttons {
       display: flex;
-      flex-wrap: wrap;
       gap: 0.8rem;
     }
 
@@ -169,14 +168,15 @@ li {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin: 2rem;
 
   >div {
     background: var(--surface);
     padding: 1.5rem;
-    height: 450px;
+    min-height: 450px;
+    max-height: calc(100% - 30px);
     border-radius: var(--border-radius-md);
     box-shadow: 0 4px 12px rgba(152, 240, 255, 0.315);
   }
@@ -262,7 +262,7 @@ li {
 
   .grid,
   .main-content {
-    margin: 1rem;
+    margin: .75rem;
   }
 }
 

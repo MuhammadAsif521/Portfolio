@@ -56,31 +56,35 @@ export class ProjectCardsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private loadProjects(): void {
-    this.error.set(null);
-    this.loading.set(true);
+ private loadProjects(): void {
+  this.error.set(null);
+  this.loading.set(true);
 
-    this.publicApi
-      .getProjects()
-      .pipe(
-        timeout(3000),
-        takeUntil(this.destroy$)
-      )
-      .subscribe({
-        next: (res) => {
-          this.projects.set(res.projects || []);
-          this.loading.set(false);
-        },
-        error: (err) => {
-          this.error.set(
-            err.name === 'TimeoutError'
-              ? 'Request timed out. Please try again later.'
-              : 'Failed to load projects. Please try again later.'
-          );
-          this.loading.set(false);
-        },
-      });
-  }
+  this.publicApi
+    .getProjects()
+    .pipe(
+      timeout(10000), // give backend 10s
+      takeUntil(this.destroy$)
+    )
+    .subscribe({
+      next: (res) => {
+        const projects = Array.isArray(res?.projects) ? res.projects : [];
+        this.projects.set(projects);
+        this.loading.set(false);
+      },
+      error: (err) => {
+        if (err.name === 'TimeoutError') {
+          // treat as no projects instead of error
+          this.projects.set([]);
+          this.error.set(null);
+        } else {
+          this.error.set('Failed to load projects. Please try again later.');
+        }
+        this.loading.set(false);
+      },
+    });
+}
+
 
   refreshProjects(): void {
     this.loadProjects();

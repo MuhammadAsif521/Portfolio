@@ -4,18 +4,15 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./core/components/layout/layout.component').then(m => m.LayoutComponent),
+      import('./core/components/layout/layout.component').then(
+        m => m.LayoutComponent
+      ),
     children: [
       {
         path: 'home',
         loadComponent: () =>
           import('./Pages/home/home.page').then(m => m.HomePage),
         data: { animation: 'HomePage' },
-      },
-      {
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full',
       },
       {
         path: 'about',
@@ -44,10 +41,16 @@ export const routes: Routes = [
       {
         path: 'project-details/:id',
         loadComponent: () =>
-          import('./Pages/project-details/project-details.page').then(m => m.ProjectDetailsPage),
+          import('./Pages/project-details/project-details.page').then(
+            m => m.ProjectDetailsPage
+          ),
         data: { animation: 'ProjectDetailsPage' },
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
       },
     ],
   },
 ];
-

@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'
 import { environment } from 'src/environments/environment.prod';
+import { Message, Project } from '../interfaces/core.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +16,23 @@ export class ApiService {
   // Projects 
   // ============================
 
-  getProjects(params?: { page?: number; limit?: number; status?: string; technology?: string }): Observable<any> {
-    let httpParams = new HttpParams();
-    if (params) {
-      Object.entries(params).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          httpParams = httpParams.set(key, value.toString());
-        }
-      });
-    }
-    return this.http.get(`${this.baseUrl}/projects`, { params: httpParams });
+  getProjects(): Observable<{ success: boolean; projects: Project[] }> {
+    return this.http.get<{ success: boolean; projects: Project[] }>(
+      `${this.baseUrl}/projects`
+    );
   }
 
-  getProjectById(id: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/projects/${id}`);
+  getProjectById(id: string): Observable<{ success: boolean; project: Project }> {
+    return this.http.get<{ success: boolean; project: Project }>(
+      `${this.baseUrl}/projects/${id}`
+    );
   }
 
   // ============================
   // Messages 
   // ============================
 
-  sendMessage(payload: { name: string; email: string; subject?: string; message: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/messages`, payload);
+  sendMessage(payload : Message): Observable<Message> {
+    return this.http.post<Message>(`${this.baseUrl}/messages`, payload);
   }
 }

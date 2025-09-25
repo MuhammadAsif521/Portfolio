@@ -16,7 +16,7 @@ export class HomePage implements OnInit, AfterViewInit, OnDestroy {
   showCursor = true;
 
   private fullText =
-    "Full-Stack Developer specializing in Ionic, Angular, and modern web technologies. I build seamless, high-performance apps for Android, iOS, and Web.";
+    "Developer specializing in Ionic, Angular, and modern web technologies. I build seamless, high-performance apps for Android, iOS, and Web.";
   private typewriterTimeout: any;
 
   constructor() { }

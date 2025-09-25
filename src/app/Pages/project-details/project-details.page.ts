@@ -32,7 +32,7 @@ ngOnInit(): void {
     this.publicApi.getProjectById(projectId).subscribe({
       next: (res) => {
         if (res.project) {
-          this.project = { ...res.project, id: projectId };
+          this.project = { ...res.project, _id: projectId };
 
           if (this.project.description) {
             const maxCharsPerParagraph = 700; // approx. 5 lines
